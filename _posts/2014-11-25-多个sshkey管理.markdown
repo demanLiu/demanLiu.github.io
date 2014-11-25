@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "多个ssh key 管理"
+date:   2014-11-25 22:40
+categories: git
+---
+##ssh-agent
+
+由于公司和自己GitHub两个账号,为了防止搞混,我在生成ssh key时,分别生成默认的id_rsa和id_rsa_github两个。可说结果每次提交github的时候都要进行ssh-add，烦死了。
+奇怪，为啥以前不用呢？于是开始了解。
+
+ssh-add其实就是利用ssh-agent，这个是专门为了处理RSA和DSA设计的。他是长时间运行的守护进程，ssh内建与其通信，这样就可以不用每次都输入密码。你只要ssh-add专用的秘钥到
+ssh-agent的告诉缓存中。但是ssh-add不是永久性的，是一次性的，也许你奇怪，你生成过后没有每次都add啊，也用的好好的啊，这是因为ssh默认会添加id_rsa。
+
+ssh-agent会输出一些环境变量，你需要执行来设置环境变量：    
+
+    eval $(ssh-agent)     
+    ssh-add id_rsa_xxx
+
+会要求你输入密码短语，因为想要无密码，直接回车就可以了。ssh-agent只是一个session，重启就失效了。
+
+##keychain
+
+由于每次 `eval $(ssh-agent)`都会启动一个ssh-agent的副本，为此使用keychain进行优化，每个系统只使用一个，他的原理是从～/.bash_profile启动时会检查ssh-agent是否运行，如果没有就启动一个ssh-agent，并把环境变量记下来，之后操作就一样。
+
+##ssh config
+
+除了上面两种，还可以利用ssh的配置文件。在～/.ssh/config 中加入配置项，如果没有config，就新建一个。
+
+>Host github.com    
+HostName github.com   
+User git    
+IdentityFile ~/.ssh/id_rsa_github
+
+多个按照这种格式进行多个配置即可。
