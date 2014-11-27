@@ -9,5 +9,6 @@ header nav ul li a:hover, #nav_current { color: #fff; background: rgba(20, 20, 2
 #search_text{ width:100px;transition:all 1.5s ease;-moz-transition:  all 1.5s ease;}
 .nav-search{color:#fff; }
 .ds-thread , .wrapper ,footer { background-color:#fff;}
-.wrapper{border-radius:20px;padding-top:10px}
+.wrapper{border-radius:20px;padding-top:10px;margin-top:20px;}
 footer, footer .wrapper{background-color:#222;color:#fff;}
+.cbp_tmlabel  h2  a:hover {text-decoration: none;color: yellow;}

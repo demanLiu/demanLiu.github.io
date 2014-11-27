@@ -1,0 +1,5 @@
+---
+layout:post
+title: "mongodb入门"
+date: 2014-11-27
+---
