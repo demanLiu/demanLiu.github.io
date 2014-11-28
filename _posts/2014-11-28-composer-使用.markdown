@@ -1,0 +1,114 @@
+---
+layout: post
+title: "composer的使用"
+date: 2014-11-28  13:00
+categories: 网站设计
+tags:   php
+---
+
+##什么是composer？
+
+composer是一个依赖管理工具，类似的，Java有Maven，Python有pip，Ruby有gem，Nodejs有npm。
+
+##安装
+
+composer不多说，官网上有,php5.3.2+。如下：
+
+    curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+
+##基本使用
+
+
+为了使用composer管理的你项目，你需要在项目的根目录下有个其配置文件。composer.json，在其中指出你的项目依赖啥：
+
+    {
+        "require":{
+            "monolog/monolog":"1.2.*"
+        }
+    }
+
+安装依赖，只需要(全局安装下):
+
+    composer installer
+
+安装一般下./vendor，自动加载则只需要：
+
+    require "vendor/autoload.php";
+
+至此，最基本的使用就ok了。
+
+##结构
+
+composer理念是每个项目都是一个包。
+在你安装完会多出两个文件: composer.lock 和 vendor文件夹
+
+###composer.lock
+
+用来锁定所有包的版本,最好加入版本控制
+
+###vendor
+
+有autoloader.php和安装的包
+
+
+##命令行
+
+####全局参数
+能够和每个命令结合使用：
+
+* --verbose (-v): 增加反馈信息的详细度。
+    -v 表示正常输出。
+    -vv 表示更详细的输出。
+    -vvv 则是为了 debug。
+* --help (-h): 显示帮助信息。
+* --quiet (-q): 禁止输出任何信息。
+* --no-interaction (-n): 不要询问任何交互问题。
+* --working-dir (-d): 如果指定的话，使用给定的目录作为工作目录。
+* --profile: 显示时间和内存使用信息。
+* --ansi: 强制 ANSI 输出。
+* --no-ansi: 关闭 ANSI 输出。
+* --version (-V): 显示当前应用程序的版本信息。
+
+                                                            
+
+初始化项目，引导你自动生成composer.json
+
+    composer init
+
+进行安装
+
+    composer install
+
+更新update
+
+    composer update
+
+如果你只是想更新几个包，你可以像这样分别列出它们：
+
+    composer update vendor/package vendor/package2
+
+你还可以使用通配符进行批量更新：
+
+    composer update vendor/*
+
+申明依赖require
+
+    composer require 
+
+他会提示你需要加什么包   
+如果你要直接指明:
+
+    composer require vendor/package:2.* vendor/package2:dev-master
+
+依赖性检测：
+
+    composer depends --link-type=require  xxx/xxx
+    
+创建项目
+
+相当于git clone 或svn  checkout 
+
+###所有命令后面跟--help可以看具体的参数。
+
+其他命令可以查看[composer官网](http://docs.phpcomposer.com/03-cli.md)
