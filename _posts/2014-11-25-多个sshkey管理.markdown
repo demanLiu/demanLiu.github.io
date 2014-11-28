@@ -2,7 +2,8 @@
 layout: post
 title:  "多个ssh key 管理"
 date:   2014-11-25 22:40
-categories: git
+categories: 基础运维
+tags:   git
 ---
 ##ssh-agent
 

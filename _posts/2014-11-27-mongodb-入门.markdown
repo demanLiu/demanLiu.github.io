@@ -1,5 +1,93 @@
 ---
-layout:post
+layout: post
 title: "mongodb入门"
-date: 2014-11-27
+date: 2014-11-27 23:00
+categories: 大数据
+tags:   mongodb
 ---
+
+##安装(ubuntu下)
+
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+    sudo apt-get update
+
+    sudo apt-get install -y mongodb-org  （最新稳定版）
+
+    sudo apt-get install -y mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1 （指定版本安装）
+
+
+安装完成后：service mongod start启动
+
+##mongodb结构组成
+
+mongodb-org这是个元包，他会自动安装4部分：
+
+###1.mongodb-org-server
+
+这个包包含了mongod的守护进程和相关配置以及初始化脚本。mongod是mongodb私有守护进行，主要处理数据请求，管理数据权限，和一些后台操作。
+
+###2.mongodb-org-mongos
+包含mongos守护进程，是一个路由服务
+
+###3.mongodb-org-shell
+
+mongo  shell,一个javascript编译器
+
+###4.mongodb-org-tools
+
+包含一些工具: mongoimport bsondump, mongodump, mongoexport, mongofiles, mongooplog, mongoperf, mongorestore, mongostat, and mongotop.
+
+##存储结构
+
+
+mongodb的数据单元是文档，结构是bson（这个是二进制和json的混合词），一个专门存储文档的序列化格式，文档存放在collections中，一个collection存在一组相关联的文档。
+一个collection可是看成一张表。集合可以包含任何文档，但为了我们方便开发，有意的将有关联的文档放一起。此外索引是按集合来的，同类文档放一个集合，也使索引更有效。
+多组集合就可以认为是一个数据库。
+
+
+###mongodb使用(CRUD操作)
+
+在终端下输入mongod进如mongodb的shell:  
+
+    root@lh:/home/liuhuan# mongo   
+    MongoDB shell version: 2.6.5    
+    connecting to: test   
+    > 
+
+新建一个json数据，进行insert操作：
+
+    > post={"aa":123,"bb":345}
+    { "aa" : 123, "bb" : 345 }
+    > db.blog.insert(post)
+    WriteResult({ "nInserted" : 1 })
+
+查询刚才插入的数据：
+
+    > db.blog.find()
+    { "_id" : ObjectId("5477e1033359d176dd3cf11a"), "aa" : 123, "bb" : 345 }
+
+可以发现mongodb会给插入的数据自动生成唯一的_id
+
+update使用的是update({},update_date),第一个限定条件，相当于where条件，第二个参数是你要用来修改的数据
+
+
+    > db.blog.find()
+    { "_id" : ObjectId("5477e1033359d176dd3cf11a"), "aa" : 123, "bb" : 345 }
+    > update_date={"aa":100}
+    { "aa" : 100 }
+    > db.blog.update({"bb":345},update_date)
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+    > db.blog.find()
+    { "_id" : ObjectId("5477e1033359d176dd3cf11a"), "aa" : 100 }
+
+可以到看原来的数据被我们的update_date替换了，如果你只要修改aa，你的数据应该是post.aa=100 ;是替换还是修改取决于你的数据，本质是一样的。
+
+
+下面就是删除了，删除不多说了，使用remove({}),加上限定条件，如果为空，就是删除所有文档。
+
+
+说明下，这里的blog就是一个集合，也可以看成关系数据库的表，里面每一个文档都是一个记录。
+到这里你已经对mongodb有初步感受了，下次进一步探讨。
