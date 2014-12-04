@@ -14,6 +14,6 @@ tags:   plan
 ##2014-12-01 —— 2014-12-5(周计划)
 
 * 完成docker配置mysql主从 <span class="finish"> 完成</span>
-* 复习下lnmpa，前端nignx，后端apache配置 <span class="finish"> 完成 </span>
+* 复习下lnmpa，前端nginx，后端apache配置 <span class="finish"> 完成 </span>
 * 新建代码仓，微信消息管理，回顾之前代码，基本走通，逐步重构
 * 开始设计模式细学，理解后写一篇博客
