@@ -15,5 +15,13 @@ tags:   plan
 
 * 完成docker配置mysql主从 <span class="finish"> 完成</span>
 * 复习下lnmpa，前端nginx，后端apache配置 <span class="finish"> 完成 </span>
-* 新建代码仓，微信消息管理，回顾之前代码，基本走通，逐步重构
+* 新建代码仓，微信消息管理，回顾之前代码，基本走通，逐步重构<span class="finish"> 完成 </span>
 * 开始设计模式细学，理解后写一篇博客
+
+
+##2014-12-22 —— 20112-28(周计划）
+
+* 复习Innodb 存储引擎揭秘
+* 开始设计模式一种（php，java，C++）至少2种实现
+* 完成nginx负载均衡和nginx的高可用
+* 练习一个算法
