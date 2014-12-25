@@ -190,6 +190,101 @@ Nginx.conf其实在这个文件中，默认的注释也已经把基本的使用�
 以上只是nginx的基本配置，如果要想熟练掌握，还需要亲自操作。这里主要操作两个功能：反向代理负载均衡 和 Nginx高可用
 
 ####负载均衡
+下面实践操作下Nginx的负载均衡：
+
+#####机器选择3台
+前端代理：    
+172.17.0.2     
+后端服务器：   
+172.17.0.3     
+172.17.0.4     
+
+#####基本软件配置
+
+centos6     
+nginx1.6     
+php5.3     
+php-fpm     
+
+由于本地操作，采用docker快速构建3台机器。基本镜像这是以上软件。      
+对于前端代理服务器,将容器80端口映射到宿主8010端口，可以在宿主浏览器localhsot:8010进行访问
+
+    docker run -ti -p 8010:80 liuhuan/centos6:3.0
+
+对于后端直接run就行了
+
+    docker run -ti liuhuan/centos6:3.0
+
+至此你已经有了3台机器。
+
+现在只需要nginx配置下反向代理。   
+前端机器：
+在nginx.conf的http中加入：
+
+    upstream localhost {
+        server  172.17.0.3:80;
+        server  172.17.0.4:80;
+    }
+
+    server{
+        listen 80;
+        server_name localhost;
+        location / {
+            root   /usr/share/nginx/html;
+            proxy_pass         http://localhost;
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
+    }
+
+
+你可以建这个文件 /etc/nginx/conf.d/load/balance.conf,包含上面内容，在nginx通过include进来就ok了。      
+至于后端机器正常nginx解析php配置就行了。
+
+    server {
+    listen       80;
+    server_name  localhost;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/log/host.access.log  main;
+
+    location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+    root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    location ~ \.php$ {
+    root           /usr/share/nginx/html;
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  /usr/share/nginx/html$fastcgi_script_name;
+    include        fastcgi_params;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+    }
+
+好了，在宿主浏览器访问localhost:8010/xxxx就可以访问了
 
 
 
