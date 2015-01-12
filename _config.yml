@@ -10,7 +10,8 @@ github_username:  demanLiu
 
 # Build settings
 markdown: kramdown
-paginate: 10
+paginate: 8
+paginate_path: "page:num"
 cate1: 网站设计
 cate2: 大数据
 cate3: 云计算

@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "sysbench使用"
+date:   2015-01-06  23:00
+categories: 基础运维
+tags:   mysql
+---
