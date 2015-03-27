@@ -5,3 +5,75 @@ date:   2015-01-06  23:00
 categories: 基础运维
 tags:   mysql
 ---
+#是什么
+
+    sysbench是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种不同系统参数下的数据库负载情况。
+    它主要包括以下几种方式的测试：
+    1、cpu性能
+    2、磁盘io性能
+    3、调度程序性能
+    4、内存分配及传输速度
+    5、POSIX线程性能
+    6、数据库性能(OLTP基准测试)
+    目前sysbench主要支持 MySQL,pgsql,oracle 这3种数据库
+
+#使用
+
+    root@lh:/usr/local/apache/htdocs# sysbench  
+    Missing required command argument.
+    Usage:
+    sysbench [general-options]... --test=<test-name> [test-options]... command
+    General options:
+    --num-threads=N            number of threads to use [1]
+    --max-requests=N           limit for total number of requests [10000]
+    --max-time=N               limit for total execution time in seconds [0]
+    --forced-shutdown=STRING   amount of time to wait after --max-time before forcing shutdown [off]
+    --thread-stack-size=SIZE   size of stack per thread [32K]
+    --init-rng=[on|off]        initialize random number generator [off]
+    --test=STRING              test to run
+    --debug=[on|off]           print more debugging info [off]
+    --validate=[on|off]        perform validation checks where possible [off]
+    --help=[on|off]            print help and exit
+    --version=[on|off]         print version and exit
+    Compiled-in tests:
+    fileio - File I/O test
+    cpu - CPU performance test
+    memory - Memory functions speed test
+    threads - Threads subsystem performance test
+    mutex - Mutex performance test
+    oltp - OLTP test
+    Commands: prepare run cleanup help version
+    See 'sysbench --test=<name> help' for a list of options for each test.
+    在说明可以知道，通用的几个选项，--test则针对具体的测试项目（cpu，fileio，memory，threads，mutex，oltp）
+    而针对每个具体测试项目参数，使用 help，eg：sysbench --test=cpu  help
+    至此你就学会了如何使用sysbench
+
+
+#实例
+
+    测试cpu
+    sysbench --test=cpu  --cpu-max-prime=2000  run
+    测试 fileio
+    说明下这个参数
+    –file-test-mode=STRING  文件测试模式{seqwr(顺序写), seqrewr(顺序读写), seqrd(顺序读), rndrd(随机读), rndwr(随机写), rndrw(随机读写)}
+    流程：prepare ->run->cleanup
+    sysbench --test=fileio --num-threads=2 --file-total-size=512M --file-test-mode=rndrw prepare （准备测试文件）
+    sysbench --test=fileio --num-threads=2 --file-total-size=512M --file-test-mode=rndrw run （运行测试）
+    sysbench --test=fileio --num-threads=2 --file-total-size=512M --file-test-mode=rndrw cleanup （清除测试文件）
+    测试内存
+    sysbench --test=memory --memory-block-size=4k --memory-total-size=64M run
+    测试threads
+    sysbench --test=threads --num-threads=64 --thread-yields=100 --thread-locks=2 run
+    测试互斥体性能
+    sysbench --test=mutex --mutex-num=4096 --mutex-locks=50000 --mutex-loops=20000 run
+    测试oltp
+    主要测试mysql性能
+    说明下有三种测试方式：
+    –oltp-test-mode=STRING    执行模式{simple,complex(advanced transactional),nontrx(non-transactional),sp}。默认是complex
+    流程： prepare->run->cleanup
+    sysbench --test=oltp --mysql-table-engine=innodb --oltp-table-size=1000000  --mysql-user=root  --mysql-host=127.0.0.1  --mysql-db=test prepare
+    sysbench --test=oltp --mysql-table-engine=innodb --oltp-table-size=1000000  --mysql-user=root  --mysql-host=127.0.0.1  --mysql-db=test run
+    sysbench --test=oltp --mysql-table-engine=innodb --oltp-table-size=1000000  --mysql-user=root  --mysql-host=127.0.0.1  --mysql-db=test  cleanup
+
+
+
