@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "proftpd安装和配置"
+date:   2015-04-30 22:40
+categories: 基础运维
+tags:   ftp
+---
