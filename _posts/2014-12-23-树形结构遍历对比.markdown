@@ -5,3 +5,60 @@ date:   2014-12-23  13:20
 categories: 网站设计
 tags:   php
 ---
+
+###测试数据
+对于父子关系是我们常用的功能。以下是我们要建立树形结构的数据。
+
+![data](/images/tree_data.png)
+
+* step1:从数据库查找数据，放入数组。
+
+        <?php
+        $pdo = new PDO("mysql:host=localhost;dbname=test","root",""); 
+        $rs = $pdo -> query("select * from catagory"); 
+        $rs = $rs->fetchAll(PDO::FETCH_ASSOC);
+        $temp = array();
+        foreach($rs as $value){
+            $value['ref'] = 1;
+            if(!isset($temp[$value['id']])) 
+                $temp[$value['id']] = $value;
+        }
+
+这里我把数据的id作为key，这样方便我们后面操作，增加一个ref字段，这个字段可以用来判断是否与其他数组引用，如果这个item有一个子item，ref就加一，
+如果这个item是其他item的子item就减一，如果ref为0，就删除了。(这里借鉴了zend_value的gc机制）
+
+* step2:递归函数编写
+
+作为递归函数，要有递归出入口。
+
+我们依次遍历数组，将子item挂到父item上，这时父item的ref就加1，子item就减1了，这时我们就要进行递归，把子item的变为0的unset了，直到ref不再变化，说明父子关系
+都已经组合好了。总结下：如果关联关系ref发生改变就要重新处理一次，直到关系都处理完了，不再发生变化。
+
+递归入口：ref发生变化；
+递归出口：ref不再变化；
+
+
+        init($temp);
+        function init(&$temp,$flag=false){
+            foreach($temp as $key =>$value){
+                if(!isset($temp[$value['parent_id']]))
+                    continue;
+                if($temp[$key]['ref'] == 0)
+                    unset($temp[$key]);
+                if($temp[$value['parent_id']]&&$value['ref']){
+                    $temp[$value['parent_id']]['child'][$value['id']] = $value;
+                    $temp[$value['parent_id']]['ref'] +=1;
+                    $flag = true;
+                    $temp[$key]['ref'] -=1;
+                }
+            }
+            if($flag){
+                init($temp);
+            }else{
+                return;
+            }
+        }
+         
+这样就完成了主要的代码      
+             
+
