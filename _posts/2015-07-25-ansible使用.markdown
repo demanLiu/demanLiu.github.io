@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "ansible使用"
+date:   2015-07-26  17:23
+categories: 网站设计
+tags:   php
+---
+
