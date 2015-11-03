@@ -1,0 +1,132 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+vmap <buffer> [] <Plug>Markdown_MoveToPreviousSiblingHeader
+nmap <buffer> [] <Plug>Markdown_MoveToPreviousSiblingHeader
+vmap <buffer> [[ <Plug>Markdown_MoveToPreviousHeader
+nmap <buffer> [[ <Plug>Markdown_MoveToPreviousHeader
+vmap <buffer> ]c <Plug>Markdown_MoveToCurHeader
+nmap <buffer> ]c <Plug>Markdown_MoveToCurHeader
+vmap <buffer> ]u <Plug>Markdown_MoveToParentHeader
+nmap <buffer> ]u <Plug>Markdown_MoveToParentHeader
+vmap <buffer> ][ <Plug>Markdown_MoveToNextSiblingHeader
+nmap <buffer> ][ <Plug>Markdown_MoveToNextSiblingHeader
+vmap <buffer> ]] <Plug>Markdown_MoveToNextHeader
+nmap <buffer> ]] <Plug>Markdown_MoveToNextHeader
+vmap <buffer> gx <Plug>Markdown_OpenUrlUnderCursor
+nmap <buffer> gx <Plug>Markdown_OpenUrlUnderCursor
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal autoindent
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=b:*,b:+,b:-,b:>
+setlocal commentstring=>\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal cursorcolumn
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'mkd.markdown'
+setlocal filetype=mkd.markdown
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=Foldexpr_markdown(v:lnum)
+setlocal foldignore=#
+setlocal foldlevel=9999
+setlocal foldmarker={,}
+setlocal foldmethod=expr
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tqlnr
+setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\|^[-*+]\\s\\+
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=GetMkdIndent()
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal nomodeline
+setlocal modifiable
+setlocal nrformats=
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'mkd.markdown'
+setlocal syntax=mkd.markdown
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal nowrap
+setlocal wrapmargin=0
+6
+normal zo
+6
+normal zo
+76
+normal zo
+6
+normal zo
+6
+normal zo
+let s:l = 91 - ((49 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+91
+normal! 0199l
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

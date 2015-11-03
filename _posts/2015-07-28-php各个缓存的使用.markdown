@@ -1,0 +1,91 @@
+---
+layout: post
+title:  "php各个缓存使用"
+date:   2015-07-28  14:44
+categories: 网站设计
+tags:   php
+---
+
+###缓存总览
+
++ 浏览器缓存
+
++ 服务器缓存
+
++ php代码缓存
+
++ 内存缓存
+
++ mysql缓存
+
+
+###基准测试（原始php，没有任何优化）
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <th>测试平台</th>
+        <td>mac air OSX 10.10.2</td>
+    </tr>
+    <tr>
+        <th>CPU</th>
+        <td>i5u 1.6GHz</td>
+    </tr>
+    <tr>
+        <th>内存</th>
+        <td>4G</td>
+    </tr>
+    <tr>
+        <th>Web服务器</th>
+        <td>Apache2.4</td>
+    </tr>
+    <tr>
+        <th>PHP版本</th>
+        <td>5.3.29</td>
+    </tr>
+</table>
+
+我们执行测试的页面是上次递归生成父子关系的分类树。
+
+    ab -n 10000  -c100  http://localhost/lh_test/catagory.php
+   
+![基础测试结果](/images/php_cache/ab_base.jpg)
+
+###使用Xcache
+
+    wget http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz
+
+####编译参数
+
+    ./configure --prefix=/usr/local/php_extension --with-php-config=/usr/local/homebrew/Homebrew-homebrew-4e2b15c/bin/php-config --enable-xcache
+
+![基础测试结果](/images/php_cache/ab_xcache.png)
+
+###使用APC
+
+####下载地址
+
+    http://pecl.php.net/package/apc
+
+####编译参数
+
+    ./configure --with-php-config=/usr/local/homebrew/Homebrew-homebrew-4e2b15c/bin/php-config --enable-apc --enable-apc-debug
+
+![基础测试结果](/images/php_cache/ab_apc.png)
+
+###使用Zend Opcache
+
+首先去官网下载最近的zendopcache7.05,三步走安装好
+    
+    zend_extension=opcache.so
+    opcache.memory_consumption=128 //共享内存大小, 这个根据你们的需求可调
+    opcache.interned_strings_buffer=8 //interned string的内存大小, 也可调
+    opcache.max_accelerated_files=4000 //最大缓存的文件数目
+    opcache.revalidate_freq=60 //60s检查一次文件更新
+    opcache.fast_shutdown=1 //打开快速关闭, 打开这个在PHP Request Shutdown的时候 会收内存的速度会提高
+    opcache.enable_cli=1
+
+需要注意的是这里是zend_extension 要全路径的
+
+![基础测试结果](/images/php_cache/ab_opcache.png)
+
+可见效果并不如意，也许是我参数设置不合理，或是测试的文件本身没有啥可以缓存的，以后可以研究下，不过鸟哥还是推荐用opcache，之后可以深入下。
