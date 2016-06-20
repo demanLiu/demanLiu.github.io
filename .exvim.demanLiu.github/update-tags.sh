@@ -1,6 +1,6 @@
 #!/bin/bash
 export DEST="./.exvim.demanLiu.github"
-export TOOLS="/private/var/root/.vim/tools/"
+export TOOLS="/root/.vim/tools/"
 export CTAGS_CMD="ctags"
 export OPTIONS="--fields=+iaS --extra=+q"
 export TMP="${DEST}/_tags"
