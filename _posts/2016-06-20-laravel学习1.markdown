@@ -1,0 +1,44 @@
+---
+layout: post
+title:  "laravel学习1"
+date:   2016-06-20  23:20
+categories: 网站设计
+tags:   php
+---
+
+
+### 预备知识
+
+1. composer 就是个包管理工具，不多说，装起来
+2. 有一定的面向对象思想，依赖注入，控制反转，设计模式
+
+
+### 学习目录
+
+1. 框架结构
+2. 框架运行流程
+3. 框架使用
+4. 框架二次开发
+
+
+#### 框架结构
+
+
+当你安装完laravel之后（建议使用composer），使用laravel new 的命令，你就会创建一个laravel基础工程。
+
+![目录结构](/images/laravel_study/laravel_floder.png)
+
+app --- 代码目录
+bootstrap  --- 框架启动文件
+config   --- 配置文件目录
+database --- 数据库迁移和填充文件
+public --- 相关资源和入口文件
+resources --- 原始资源文件
+storage --- 缓存
+tests --- 单元测试
+vendor  ---  相关依赖文件   laravel相关类库就在这里
+.env  --- 环境相关配置
+
+#### 框架运行流程
+
+
