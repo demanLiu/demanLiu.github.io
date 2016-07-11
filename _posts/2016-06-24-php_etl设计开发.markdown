@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "PHP ETL设计开发"
+date:   2016-07-11  22:02
+categories: 网站设计
+tags:   php
+---
+
+  由于公司需要进行系统数据同步，并且两个系统表结构差距较大，因此需要设计一个能方便转接的工具。
+
+
+###  系统架构
+  
+  主要采用常见的生产发布者模式。
+
+  一个job监听数据变动，我们使用laravel5.0,相关表通常都是会设计create_time,update_time,而这些字段，通常laravel会
+  自动更新，这就给我们数据同步提供基础，我们很容易使用一个任务监听一段时间的数据变动，where update_time > xxxx。
+  得到数据之后，你可以放入队列，方便之后job的消耗。第一步至此ok。
+
+
+  接下来，你需要一个配置来对数据进行转换，得到一个更新依据，如果想通用点，可以生成sql文件或者任何自定义格式的文件。
+  在我们转接的过程中，我们要处理的映射关系，主要有三种，列=>列，列=>行（我称之列发散），行=>列（行收缩）,在列对应关系
+  又有三种，一对一，一对多和多对一。之后有机会画图详解下，其实自己好好想想就会明白。
+
+
+
+    {
+      "Table": {
+        "from":"A",
+        "to":"B",
+        "type": "Col_COl",   //主要有三种 Col_Col ,   Col_Row , Row_Col
+        "args":{
+          "cr_cloumn":["e"],  // cr_cloumn 则对应的options [list,cross], 列表和笛卡尔积 
+          "options":"list"   // rc_cloumn 则对应的options join的字符',' '/' 自定义
+        }
+      },
+      "Cloumns":{
+        "a":{
+          "type": 0,          // 0 ,默认列一对一 args 为空
+          "args": "",         // 1 ,列一对多， args 分割符
+          "target":["b"]      // 2 ,列多对一， args [append , add] ,分别追加和直接添加
+          "from_dataType":"json",
+          "to_dataType":"json"
+        }
+      }
+    }
+    
+
+
