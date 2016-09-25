@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "设计模式"
+title:  "设计模式(1)"
 date:   2016-09-19  21:00
 categories: 网站设计
 tags:   php
