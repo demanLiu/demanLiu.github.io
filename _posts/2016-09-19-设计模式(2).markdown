@@ -21,3 +21,61 @@ tags:   php
 3. 强调一系列相关产品对象设计以便用于联合使用
 4. 提供一个产品类库，而只想显示他的接口而不是设计
   
+
+####  类图关系
+
+
+泛化： 继承
+实现： 接口实现
+依赖： 具有使用关系，相识关系，只有在特定的地方（某个方法内）才有关系
+关联： 类与类或者接口之间依赖关系，拥有关系
+聚合： 关联的特殊情况，弱拥有关系
+组合:  关联的特殊情况，强拥有关系
+
+
+    abstract class Product{
+      public function sayHello(){
+        echo "hello";
+      }
+    }
+    class ProductA extends Product{
+      public function sayHello(){
+        echo "ProductA";
+      }
+    }
+    class ProductB extends Product{
+      public function sayHello(){
+        echo "ProductB";
+      }
+    }
+    abstract class Factory{
+      public function create(){
+          echo "create object";
+      }
+    }
+
+    class ConcreteFactory1 extends Factory{
+       public function  createA(){
+          return new ProductA();
+       }
+       public function  createB(){
+          return new ProductB();
+       }
+    }
+    class ConcreteFactory2 extends Factory{
+       public function  createB(){
+          return new ProductB();
+       }
+    }
+    $a  = new ConcreteFactory1();
+    $a->createA()->sayHello();
+
+   
+#### 总结
+
+一个工厂生产多个产品，当工厂需要增加产品时就需要修改工厂类了。
+
+1. 分离了具体的类,仅申明创建产品的接口，真正创建产品的是product类
+2. 易于交换产品系列
+3. 有利于产品一致性
+4. 难以支持新产品
