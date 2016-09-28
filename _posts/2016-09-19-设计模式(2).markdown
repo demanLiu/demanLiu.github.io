@@ -32,6 +32,7 @@ tags:   php
 聚合： 关联的特殊情况，弱拥有关系
 组合:  关联的特殊情况，强拥有关系
 
+![抽象工厂](/images/design_patterns/abstractFactory.png)
 
     abstract class Product{
       public function sayHello(){

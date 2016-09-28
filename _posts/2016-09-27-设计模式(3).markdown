@@ -1,0 +1,99 @@
+---
+layout: post
+title:  "设计模式(3)"
+date:   2016-09-21  22:26
+categories: 网站设计
+tags:   php
+---
+
+## 创建型模式
+
+
+#### Builder (对象创建型)
+
+#### 目的
+
+将复杂对象的构建与他的表示分离，使得同样的构建过程创建不同的表示。
+
+#### 适用场景
+
+1.当创建复杂对象的算法应当独立于该对象的组成部分以及他们的装配方式
+2.构造过程必须允许被构造的对象不同的表示
+
+![Builder](/images/design_patterns/builder.png)
+
+      class Product{
+        function getName(){
+          echo "hello";
+        }
+      }
+      class ProductA extends Product{
+        function getName(){
+          echo "ProductA";
+        }
+      }
+      class ProductB extends Product{
+        function getName(){
+          echo "ProductB";
+        }
+      }
+      abstract class Builder{
+        abstract function buildPart1();
+        abstract function buildPart2();
+        abstract function buildPart3();
+      }
+      class ConcreteBuilder1 extends Builder{
+        function buildPart1(){
+            echo "build A part1";
+        }
+        function buildPart2(){
+            echo "build A part2";
+        }
+        function buildPart3(){
+            echo "build A part3";
+        }
+        function getResult(){
+            echo "A finish!!!";
+            return new ProductA();
+        }
+      }
+      class ConcreteBuilder2 extends Builder{
+        function buildPart1(){
+            echo "build B part1";
+        }
+        function buildPart2(){
+            echo "build B part2";
+        }
+        function buildPart3(){
+            echo "build B part3";
+        }
+        function getResult(){
+            echo "B finish!!!";
+            return new ProductB();
+        }
+      }
+      class Director{
+        public function buildA(ConcreteBuilder1 $builder){
+          $builder->buildPart1();
+          return $builder->getResult();
+        }
+        public function buildB(ConcreteBuilder2 $builder){
+          $builder->buildPart1();
+          $builder->buildPart2();
+          return $builder->getResult();
+        }
+      }
+      //***client*****//
+      $director = new Director();
+      $director->buildA(new ConcreteBuilder1)->getName();
+      $director->buildB(new ConcreteBuilder2)->getName();
+
+     
+
+#### 实现
+
+
+1.装配和构造接口 生成器逐步构造他们的产品，因此Builder必须足够普遍  
+2.产品不应该抽象类  通常情况下，由具体构造器生成的产品差异通常很大以至于没有必要共用同一个父类。实例代码只是为了方便  
+
+
