@@ -1,0 +1,53 @@
+---
+layout: post
+title:  "设计模式(5) prototype模式"
+date:   2016-09-21  22:26
+categories: 网站设计
+tags:   php
+---
+
+###  目的
+
+用原型实例来指定创建对象的种类，通过拷贝这些原型创建新的对象。
+
+#### 适用性
+
+1. 系统独立与产品创建、构成和表示
+2. 实例化的类在运行时刻指定时，例如：动态加载
+3. 避免创建一个与产品类层次平行的工厂类层次
+4. 一个类的实例只能有几个不同的状态组合中的一种
+
+
+        interface Product {
+        }
+
+        class Factory {
+
+          private $product;
+
+          public function __construct(Product $product) {
+            $this->product = $product;
+          }
+
+          public function getProduct() {
+            return clone $this->product;
+          }
+        }
+
+        class SomeProduct implements Product {
+          public $name;
+        }
+
+
+        $prototypeFactory = new Factory(new SomeProduct());
+
+        $firstProduct = $prototypeFactory->getProduct();
+        $firstProduct->name = 'The first product';
+
+        $secondProduct = $prototypeFactory->getProduct();
+        $secondProduct->name = 'Second product';
+
+        print_r($firstProduct->name);
+        // The first product
+        print_r($secondProduct->name);
+        // Second product
