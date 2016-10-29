@@ -18,6 +18,10 @@ tags:   php
 4. 一个类的实例只能有几个不同的状态组合中的一种
 
 
+![Prototype](/images/design_patterns/prototype.png)
+
+
+
         interface Product {
         }
 
