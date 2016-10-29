@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "设计模式(5) prototype模式"
-date:   2016-09-21  22:26
+date:   2016-09-27  22:26
 categories: 网站设计
 tags:   php
 ---
