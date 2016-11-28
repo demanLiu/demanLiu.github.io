@@ -1,0 +1,52 @@
+---
+layout: post
+title:  "设计模式(6) adapter模式"
+date:   2016-11-28  22:57
+categories: 网站设计
+tags:   php
+---
+
+
+### 目的
+
+将类的接口转换成客户希望的另外一个接口。分为类适配器和对象适配器。
+类适配器需要借助多继承，对象适配器只是将继承关系改为引用。
+
+
+
+![Apater](/images/design_patterns/class_adapter.png)
+
+
+
+
+![Apater](/images/design_patterns/object_adapter.png)
+
+
+### 代码
+
+php和java均不支持多继承，所以示例代码以对象适配器来。
+
+    //需要的接口定义
+    interface Target{
+      public function method();
+    }
+    //已经存在的类
+    class Adaptee{
+      public function method2(){
+        echo "hello";
+      }
+
+    }
+
+    //将method2转化成method
+    class Apapter implements Target {
+      private $adaptee;
+      public function __construct(){
+          $adaptee = new Adaptee();
+      }
+      public function method(){
+        $this->adaptee->method2();
+      }
+    }
+
+
