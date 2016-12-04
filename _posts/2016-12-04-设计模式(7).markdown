@@ -1,0 +1,71 @@
+---
+layout: post
+title:  "设计模式(7) bridge模式"
+date:   2016-12-04 17:53
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+
+抽象部分和实现部分分离，各自独立的变化。
+
+
+
+![Bridge](/images/design_patterns/bridge.png)
+
+
+### 优点
+
+1. 分离接口及其实现部分
+2. 提高可扩充性
+3. 实现细节对客户端透明
+
+
+### 实现
+
+
+
+      abstract class Abstration{
+        protected $imp;
+        public function operation(){
+          $this->imp->operationImp();
+        }
+        
+      }
+      class RefinedAbstration  extends Abstration{
+        function __construct(Implementor $imp){
+          $this->imp =  $imp;
+        }
+      }
+      abstract class Implementor {
+        public function operationImp(){
+        }
+      }
+
+      class ConcreteImplementorA extends Implementor{
+        public function operationImp(){
+          echo "ConcreteImplementorA operation!!!";
+        }
+      }
+      class ConcreteImplementorB extends Implementor{
+        public function operationImp(){
+          echo "ConcreteImplementorB operation!!!";
+        }
+
+      }
+
+      //测试代码
+      $impA = new ConcreteImplementorA();
+      $impB = new ConcreteImplementorB();
+      $clientA = new RefinedAbstration($impA);
+      $clientB = new RefinedAbstration($impB);
+      $clientA->operation();
+      $clientB->operation();
+
+
+
+
+
+

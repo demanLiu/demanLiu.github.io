@@ -1,0 +1,79 @@
+---
+layout: post
+title:  "设计模式(9)decorator模式"
+date:   2016-12-04 19:04
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+动态给类增加额外的功能，比子类更加灵活。
+
+
+![decorator](/images/design_patterns/decorator.png)
+
+
+### 实现
+
+
+    abstract class Component{
+      public abstract function operation();
+    }
+    class ConcreteComponent extends Component{
+      public function operation(){
+        echo "我是被装饰的类的方式!!!";
+      }
+    }
+
+    abstract class Decorator extends Component{
+      protected $component;
+    }
+    class ConcreteDecoratorA extends Decorator{
+      private $decoratorA;
+      function __construct(Component $component){
+        $this->component = $component;
+      } 
+      public function operation(){
+        $this->component->operation();
+        //add varaiable
+        $this->decoratorA = 11;
+        echo "我增加了一个变量，值是11";
+      }
+
+    }
+    class ConcreteDecoratorB extends Decorator{
+      function __construct(Component $component){
+        $this->component = $component;
+      } 
+      public function operation(){
+        $this->component->operation();
+        //add function
+        $this->decoratorFun();
+      }
+      public function decoratorFun(){
+        echo "新增一个方法";
+      }
+
+    }
+    //测试代码
+    $concreteComponent = new ConcreteComponent();
+    $concreteDecoratorA = new ConcreteDecoratorA($concreteComponent);
+    $concreteDecoratorB = new ConcreteDecoratorB($concreteComponent);
+    //增加变量
+    $concreteDecoratorA->operation();
+    $concreteDecoratorB->operation();
+    //在A的基础上增加B
+    $concreteDecoratorC = new ConcreteDecoratorB($concreteDecoratorA);
+    $concreteDecoratorC->operation();
+
+
+
+
+
+
+
+
+
+
+
