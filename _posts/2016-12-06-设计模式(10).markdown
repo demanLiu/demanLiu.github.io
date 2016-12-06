@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "设计模式(10)facade模式"
+date:   2016-12-04 22:20
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+为子系统接口提供统一的界面，子系统更容易使用,定义一组高级接口
+
+
+
+![facade](/images/design_patterns/facade.png)
+
+
+###  实现
+
+
+对子系统做统一的封装，这里就不做例子说明，可以参考下laravel，很多facade
