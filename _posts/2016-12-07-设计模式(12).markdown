@@ -1,0 +1,81 @@
+---
+layout: post
+title:  "设计模式(12)proxy模式"
+date:   2016-12-07 23:00
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+为其他对象提供代理以控制对象的访问
+
+
+
+![proxy](/images/design_patterns/proxy.png)
+
+
+
+### 适用性
+
+1. 远程代理 为一个对象在不同地址空间提供局部代表 ，（通过对象转发到不同的地址去）
+2. 虚代理 延迟加载，先创建一个小对象，真正用的时候再创建
+3. 保护代理  访问增加权限控制
+4. 智能指引 取代简单指针   
+a. 在访问时附加操作，增加引用计数，为0时自动释放    
+b. 第一次引用持久对象，放入内存   
+c. 访问前判断是否被锁定，锁定不让改变   
+
+### 实现
+
+主要有两种静态和动态
+
+
+    abstract class Subject
+    {
+      public abstract function  Request();
+    }
+    class RealSubject extends Subject
+    {
+      public function  Request(){
+        echo "this is realSubject!!";
+      }
+    }
+    class Proxy extends Subject
+    {
+      private $realSubject;
+      function __construct(Subject $subject){
+        $this->realSubject = $subject;
+      }
+      public function Request(){
+        echo "use Proxy:";
+        $this->realSubject->Request();
+      }
+    }
+    //测试代码
+    $realObj = new RealSubject();
+    $proxy = new Proxy($realObj);
+    $proxy->Request();
+
+
+
+静态方式，RealSubject有什么方法，proxy就要实现什么，如果方法多就很麻烦
+
+
+
+    class Proxy
+    {
+      private $realSubject;
+      function __construct(Subject $subject){
+        $this->realSubject = $subject;
+      }
+      public function __call($method,$args){  
+        //方法前后可以做很多智能化的处理  
+        echo "use Proxy:";
+        return call_user_func_array(array($this->realSubject, $method), $args);  
+      }  
+    }
+
+
+
+
