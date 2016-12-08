@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "设计模式(13)chain of responsibility模式"
+date:   2016-12-08 22:02
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+使多个对象都可以处理请求，从而避免请求发送者和接受者的耦合关系。
+
+
+![Responsibility](/images/design_patterns/responsibility.png)
+
+
+### 实现
+
+
+    abstract class Handler
+    {
+      protected $handler;
+      function setSuccessor(Handler $handler){
+        $this->handler = $handler;
+      }
+      public abstract function HandlerRequest();
+    }
+
+    class ConcreteHandler1 extends Handler
+    {
+      
+      public function HandlerRequest(){
+      //要么自己处理，要么传出去(增加某些条件)
+        if($this->handler){
+          $this->Handler->HandlerRequest();
+        }else{
+          echo "do it  Handler1!!";
+        }
+      }
+
+    }
+    class ConcreteHandler2 extends Handler
+    {
+      
+      public function HandlerRequest(){
+      //要么自己处理，要么传出去(增加某些条件)
+        if($this->handler){
+          $this->Handler->HandlerRequest();
+        }else{
+          echo "do it  Handler2!!";
+        }
+      }
+
+    }
+    //测试代码
+    $handler1 = new ConcreteHandler1();
+    $handler2 = new ConcreteHandler2();
+
+    $handler1->HandlerRequest();
+    $handler1->setSuccessor($handler2);
+    $handler2->HandlerRequest();
+
+

@@ -1,0 +1,77 @@
+---
+layout: post
+title:  "设计模式(14)Command模式"
+date:   2016-12-08 22:48
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+请求封装成一个对象，用不同的请求对客户端进行参数化，对请求排队或记录日志，以及可以撤销的操作。
+
+![command](/images/design_patterns/command.png)
+
+
+### 实现
+
+    abstract class Command
+    {
+      protected $receiver;
+      public function __construct($receiver){
+        $this->receiver = $receiver;
+      }
+      public abstract function excute();
+    }
+    class Invoker
+    {
+      protected $commands;
+      public function setCommand(Command $command){
+         $this->commands[] = $command;
+      }
+      public function excuteCommand(){
+         foreach($this->commands as $command){
+          $command->excute();
+         }
+      }
+      public function removeCommand(Command $command){
+        $key = array_search($command,$this->commands);
+        if($key){
+          unset($this->commands[$key]);
+        }
+      }
+    }
+    class ConcreteCommand1  extends Command
+    {
+      public function excute(){
+        $this->receiver->action1();
+      }
+    }
+    class ConcreteCommand2  extends Command
+    {
+      public function excute(){
+        $this->receiver->action2();
+      }
+    }
+    class Receiver1
+    {
+      public function action1(){
+        echo "do action1";
+      }
+    }
+    class Receiver2
+    {
+      public function action2(){
+        echo "do action2";
+      }
+    }
+
+    //测试代码
+    $receiver1 = new Receiver1();
+    $receiver2 = new Receiver2();
+    $command1 = new ConcreteCommand1($receiver1);
+    $command2 = new ConcreteCommand2($receiver2);
+    $invoker = new Invoker();
+    $invoker->setCommand($command1);
+    $invoker->setCommand($command2);
+    $invoker->excuteCommand();
