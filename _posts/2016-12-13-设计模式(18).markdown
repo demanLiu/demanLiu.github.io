@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "设计模式(18)memento模式"
+date:   2016-12-13 23:51
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+

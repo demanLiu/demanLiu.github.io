@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "设计模式(15)interpreter模式"
+date:   2016-12-08 23:08
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+给定一个语言，定义他的文法表示，并定义一个解释器，这个解释器用来解释
+
+
+![interpreter](/images/design_patterns/interpreter.png)
+
+
+### 实现
+
+

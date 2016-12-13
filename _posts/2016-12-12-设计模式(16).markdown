@@ -1,0 +1,98 @@
+---
+layout: post
+title:  "设计模式(16)iterator模式"
+date:   2016-12-12 22:30
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+提供一个方法顺序访问一个聚合对象中的各个元素又不暴露该对象的内部表示。
+
+
+![iterator](/images/design_patterns/iterator.png)
+
+
+### 实现
+
+
+    abstract class IIterator  
+    {  
+        public abstract function First();  
+        public abstract function Next();  
+        public abstract function IsDone();  
+        public abstract function CurrentItem();  
+    }  
+      
+    //具体迭代器  
+    class ConcreteIterator extends IIterator  
+    {  
+        private $aggre;  
+        private $current = 0;  
+        public function __construct($obj)  
+        {  
+            $this->aggre = $obj->list;  
+        }  
+        //返回第一个  
+        public function First()  
+        {  
+            return $this->aggre[0];  
+        }  
+      
+        //返回下一个  
+        public function  Next()  
+        {  
+            $this->current++;  
+            if($this->current<count($this->aggre))  
+            {  
+                return $this->aggre[$this->current];  
+            }  
+            return false;  
+        }  
+      
+        //返回是否IsDone  
+        public function IsDone()  
+        {  
+            return $this->current>=count($this->aggre)?true:false;  
+        }  
+      
+        //返回当前聚集对象  
+        public function CurrentItem()  
+        {  
+            return $this->aggre[$this->current];  
+        }  
+    }  
+
+    interface Aggregate {  
+        public function add($obj);  
+        public function remove($obj);  
+        public function iterator();  
+    }  
+    class ConcreteAggregate implements Aggregate {  
+        public $list;
+        public function __construct(){
+          $this->list = [];
+        }
+        public function add($item) {  
+          $this->list[] = $item;
+        }  
+      
+        public function iterator() {  
+            return new ConcreteIterator($this);  
+        }  
+      
+        public function remove($item) {  
+          unset($this->list[array_search($this->list,$item)]);
+        }  
+    }  
+
+    //测试代码
+    $aggregate = new ConcreteAggregate();
+    $aggregate->add(1);
+    $aggregate->add(10);
+    $iterator = $aggregate->iterator($aggregate);
+    echo $iterator->First();
+    echo $iterator->Next();
+
+
