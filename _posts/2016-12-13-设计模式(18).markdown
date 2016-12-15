@@ -8,3 +8,83 @@ tags:   php
 
 ### 目的
 
+不破坏内部封装性的前提下，捕获一个对象的内部状态 ，并在对象之外保存这个状态，以便之后恢复到这个状态。
+
+
+![memento](/images/design_patterns/memento.png)
+
+
+    class originator
+    {
+      private $state1;
+      private $state2;
+      public function setState($state1,$state2){
+        $this->state1 = $state1;
+        $this->state2 = $state2;
+      }
+      public function setMemento(Memento $m){ 
+         $this->state1 = $m->getState1();
+         $this->state2 = $m->getState2();
+      }
+      public function createMemento(){ 
+         return new Memento($this->state1,$this->state2);
+      }
+      public function getState1(){
+        return $this->state1;
+      }
+      public function getState2(){
+        return $this->state2;
+      }
+    }
+
+    class Memento
+    {
+      
+      private $state1;
+      private $state2;
+      public function __construct($state1,$state2){
+        $this->state1 = $state1; 
+        $this->state2 = $state2; 
+      }
+      public function getState1(){
+        return $this->state1;
+      }
+      public function getState2(){
+        return $this->state2;
+      }
+    }
+    class Caretaker
+    {
+      private $mementos;
+      public function  add(Memento $m){
+        $this->mementos[] = $m;
+      }
+      public function getLast(){  
+        $len = count($this->mementos);  
+        if($len < 1){  
+          return;  
+        }  
+
+        $temp = $this->mementos[$len - 1];  
+        unset($this->mementos[$len - 1]);
+        return $temp;
+      }
+    }
+    //测试代码块
+
+    $o = new originator();
+    $o->setState(1,2);
+    $caretaker = new Caretaker();
+    echo $o->getState1().','.$o->getState2()."\n";
+    //保存这个状态
+    $caretaker->add($o->createMemento());
+    $o->setState(4,6);
+    echo $o->getState1().','.$o->getState2()."\n";
+    $caretaker->add($o->createMemento());
+    //返回上个状态
+    $o->setMemento($caretaker->getLast());
+    echo $o->getState1().','.$o->getState2()."\n";
+    $o->setMemento($caretaker->getLast());
+    echo $o->getState1().','.$o->getState2()."\n";
+
+
