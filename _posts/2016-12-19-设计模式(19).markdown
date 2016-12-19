@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "设计模式(19)observer模式"
+date:   2016-12-19 22:04
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+定义对象之间一对多的以来关系，当一个对象改变时所有依赖他的对象都得到通知并自定更新。
+
+![observer](/images/design_patterns/observer.png)
+
+
+
+    abstract class Subject{
+      protected $observers;
+      public function attach(Observer $m){
+          $this->observers[] = $m;
+      }
+      public function detach(Observer $m){
+         unset($this->observers[array_search($m,$this->observers)]);
+      }
+      public function notify(){
+        foreach($this->observers as $item){
+          $item->Update();
+        }
+      }
+    }
+    class ConcreteSubject extends Subject{
+      protected $subjectState;
+      public function __construct(){
+        $this->observers = [];
+      }
+      public function setState($o){
+        $this->subjectState = $o;
+      }
+      public function getState(){
+        return $this->subjectState;
+      }
+    }
+    abstract class  Observer {
+      public abstract function update();
+    }
+    class ConcreteObserver extends Observer{
+      private $observerState;
+      private $subject;
+      public function __construct($subject){
+        $this->subject = $subject;
+      }
+      public function update(){
+        $this->observerState =  $this->subject->getState();
+        echo "Subjectstate has  modified".", now :".$this->observerState;
+      }
+
+    }
+    //测试代码
+    $subject = new ConcreteSubject();
+    $observers = new ConcreteObserver($subject);
+    $subject->attach($observers);
+    $subject->setState('sate1');
+    $subject->notify();
