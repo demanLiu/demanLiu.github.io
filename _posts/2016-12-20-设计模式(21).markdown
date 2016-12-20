@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "设计模式(21)strategy模式"
+date:   2016-12-19 22:58
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+定义一个算法，把它们封装起来，并且可以相互替换。
+
+
+
+![strategy](/images/design_patterns/strategy.png)
+
+
+    abstract class Strategy{
+      abstract function algorithm();
+    }
+    class ConcreteStrategyA extends Strategy{
+      function algorithm(){
+        echo "ConcreteStrategyA";
+      }
+
+    }
+    class ConcreteStrategyB extends Strategy{
+      function algorithm(){
+        echo "ConcreteStrategyB";
+      }
+
+    }
+    class Context{
+      private $strategy;
+      function __construct($s){
+        $this->strategy = $s;
+      }
+      public function __call($method, $args){
+       return call_user_func_array(array($this->strategy, $method), $args);  
+      }
+
+    }
+    $concreteStrategyA = new ConcreteStrategyA();
+    $concreteStrategyB = new ConcreteStrategyB();
+    $c = new Context($concreteStrategyA);
+    $c->algorithm();
+    $c = new Context($concreteStrategyB);
+    $c->algorithm();
+

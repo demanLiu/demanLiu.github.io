@@ -1,0 +1,58 @@
+---
+layout: post
+title:  "设计模式(20)state模式"
+date:   2016-12-19 22:04
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+对象在其内部状态改变时改变它的行为。
+
+
+
+![state](/images/design_patterns/state.png)
+
+
+    class Context {
+      protected $state;
+      public function setState($s){
+        $this->state = $s;
+      }
+      public function request(){
+        $this->state->handle();
+      }
+    }
+    abstract class State{
+      abstract function handle();
+    }
+    class ConcreteStateA extends State{
+      protected $context;
+      function __construct($context){
+        $this->context = $context;
+      }
+      function handle(){
+        echo "this is stateA";
+        $this->context->setState(new ConcreteStateB($this->context));
+      }
+
+    }
+    class ConcreteStateB extends State{
+      protected $context;
+      function __construct($context){
+        $this->context = $context;
+      }
+      function handle(){
+        echo "this is stateB";
+      }
+    }
+    //测试代码
+    $context = new Context();
+    $context->setState(new ConcreteStateA($context));
+    $context->request();
+    $context->request();
+
+
+
+
