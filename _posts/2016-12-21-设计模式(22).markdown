@@ -1,0 +1,75 @@
+---
+layout: post
+title:  "设计模式(22)visitor模式"
+date:   2016-12-21 22:32
+categories: 网站设计
+tags:   php
+---
+
+### 目的
+
+访问者模式就是表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。
+
+![visitor](/images/design_patterns/visitor.png)
+
+    abstract class Visitor{
+      abstract function visitConcreteElementA($a);
+      abstract function visitConcreteElementB($b);
+    }
+    class ConcreteVisit1 extends Visitor{
+        function visitConcreteElementA($a){
+          echo "visitor1";
+          $a->operationA();
+        }
+        function visitConcreteElementB($b){
+          echo "visitor1";
+          $b->operationB();
+        }
+    }
+    class ConcreteVisit2 extends Visitor{
+        function visitConcreteElementA($a){
+          echo "visitor2";
+          $a->operationA();
+        }
+        function visitConcreteElementB($b){
+          echo "visitor2";
+          $b->operationB();
+        }
+    }
+
+
+    abstract class Element{
+      abstract function accept($v);
+    }
+    class ElementA extends Element{
+        function accept($v){
+          $v->visitConcreteElementA($this);
+        }
+        function operationA(){
+          echo "ElementA operationA";
+        }
+    }
+    class ElementB extends Element{
+        function accept($v){
+          $v->visitConcreteElementB($this);
+        }
+        function operationB(){
+          echo "ElementB operationB";
+        }
+    }
+
+    //测试代码
+    $elementA = new ElementA();
+    $elementB = new ElementB();
+    $elementA->accept(new ConcreteVisit1());
+    $elementA->accept(new ConcreteVisit2());
+    $elementB->accept(new ConcreteVisit1());
+    $elementB->accept(new ConcreteVisit2());
+
+
+
+
+
+
+
+
