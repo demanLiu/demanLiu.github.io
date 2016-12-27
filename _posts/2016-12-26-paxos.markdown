@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Paxos"
+date:   2016-12-26 22:40
+categories: 大数据
+tags:   php
+---
+
+
