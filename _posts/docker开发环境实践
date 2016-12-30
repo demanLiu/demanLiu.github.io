@@ -1,0 +1,75 @@
+---
+layout: post
+title:  "docker开发环境实践"
+date:   2016-12-30 16:40
+categories: 云计算
+tags:   php
+---
+
+
+    #!/bin/bash
+    function run_docker(){
+            if [[ $daemon = '-d' ]]
+            then
+                echo "run daemon"
+                docker rm -f $(docker ps -a  |  awk '/'$name'/ {print $1}')>/dev/null 2>&1
+                docker run --name $name  -d  -p ${port[$name]}:80 -v /data1/www/laravel/cloud/$name/api-service-
+
+    hms:/data1/www/codedir/api-service-hms/ $image supervisord -n > /dev/null 2>&1
+                echo "$name sucess"
+            else
+                echo "interact"
+                docker rm -f $(docker ps -a  |  awk '/'$name'/ {print $1}')>/dev/null 2>&1
+                docker run --name $name -ti -p ${port[$name]}:80 -v /data1/www/laravel/cloud/$name/api-service-
+
+    hms:/data1/www/codedir/api-service-hms/  $image  sh -c '/usr/local/bin/run&&/bin/bash'
+                echo "$name sucess"
+            fi
+    }
+    user=(zhangfangfang liushengjie fuxiongjun luyang lifuqiang liping huchuanhai liuhuan huhuajie fuqiang 
+
+    lizhongde litao)
+    declare -A port
+    port=([liuhuan]=8888 [zhangfangfang]=8880 [liushengjie]=8881 [fuxiongjun]=8882 [luyang]=8892 [lifuqiang]=8883 
+
+    [liping]=8884 [huchuanhai]=8885 [huhuajie]=8886 [fuqiang]=8887 [lizhongde]=8889 [litao]=8890)
+
+    for option in $*
+    do
+            case $option in
+                -d)
+                     daemon=$1
+                      shift 1
+                ;;
+                -image) image=$2
+                      shift 2
+                ;;
+            esac
+    done
+
+    action=$1
+    name=$2
+    case $action in
+      stop)  echo "stop ....."
+                docker stop $(docker ps -a  |  awk '/'$name'/ {print $1}')
+        ;;
+        kill)  echo "kill ....."
+                docker kill $(docker ps -a  |  awk '/'$name'/ {print $1}')
+        ;;
+        attach)  echo "attach ....."
+                docker attach $(docker ps -a  |  awk '/'$name'/ {print $1}')
+        ;;
+        start)  echo "start ...."
+            if [ -z $2 ]
+            then
+               echo "no name then all"
+               for name in  ${user[*]}
+               do
+                   daemon='-d'
+                   run_docker $daemon $image
+               done
+            else
+               run_docker $daemon  $image
+            fi
+        ;;
+    esac
