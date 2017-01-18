@@ -939,22 +939,25 @@ The Little Schemer，第4版，作者Dan Friedman和Matthias Felleisen。第9章
 
 Y in Practical Programs，作者Bruce McAdams，在前一节中有提到。
 ### 实例
-function Y($F) {
-    $func =  function ($f) { return $f($f); };
-    return $func(function ($f) use($F) {
-            return $F(function ($x) use($f) {
-            $ff = $f($f);
-            return $ff($x);
+
+
+
+    function Y($F) {
+        $func =  function ($f) { return $f($f); };
+        return $func(function ($f) use($F) {
+                return $F(function ($x) use($f) {
+                $ff = $f($f);
+                return $ff($x);
+            });
         });
+    }
+    And then the factorial function would be:
+
+    $factorial = Y(function($fact) {
+        return function($n) use($fact) {
+            return ($n <= 1)?1:$n*$fact($n-1);
+        };
     });
-}
-And then the factorial function would be:
+    Which does work:
 
-$factorial = Y(function($fact) {
-    return function($n) use($fact) {
-        return ($n <= 1)?1:$n*$fact($n-1);
-    };
-});
-Which does work:
-
-var_dump($factorial(6)); ==> int(720)
+    var_dump($factorial(6)); ==> int(720)
