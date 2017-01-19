@@ -961,3 +961,7 @@ Y in Practical Programs，作者Bruce McAdams，在前一节中有提到。
     Which does work:
 
     var_dump($factorial(6)); ==> int(720)
+
+
+
+http://www.rosettacode.org/wiki/Y_combinator#Common_Lisp
