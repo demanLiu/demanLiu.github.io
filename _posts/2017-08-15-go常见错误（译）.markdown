@@ -1,0 +1,91 @@
+---
+layout: post
+title:  "go常见错误（译）"
+date:   2017-07-30 15:55:00
+categories: 网站设计
+tags:   go
+---
+
+### 1.大括号不能另起一行
+
+    package main
+
+    import "fmt"
+
+    func main()  
+    { //error, can't have the opening brace on a separate line
+        fmt.Println("hello there!")
+    }
+
+
+
+
+
+### 2.变量声明未使用(全局变量除外）
+
+
+    package main
+
+    var gvar int //not an error
+
+    func main() {  
+        var one int   //error, unused variable
+        two := 2      //error, unused variable
+        var three int //error, even though it's assigned 3 on the next line
+        three = 3
+
+    }
+
+
+### 3.import的包没有使用,_可以避免报错
+
+    package main
+
+    import (
+        _ "fmt"
+        "log"
+        "time"
+    )
+
+    var _ = log.Println
+
+    func main() {
+        _ = time.Now
+    }
+
+### 4.短变量定义只能在函数内使用
+
+    package main
+
+    myvar := 1 //error
+
+    func main() {  
+      myvar1 :=2 //ok
+    }
+
+### 5.短变量定义不能重复定义
+### 6.不指明具体变量类型不能用nil作为初始值，因为他无法推测类型
+### 7.map没有cap()
+### 8.string不能复制nil
+### 9.switch case默认是break
+
+    package main
+
+    import "fmt"
+
+    func main() {
+        isSpace := func(ch byte) bool {
+            switch(ch) {
+            case ' ': //error
+            case '\t':
+                return true
+            }
+            return false
+        }
+
+        fmt.Println(isSpace('\t')) //prints true (ok)
+        fmt.Println(isSpace(' '))  //prints false (not ok)
+    }
+
+### 10.go不支持++i
+
