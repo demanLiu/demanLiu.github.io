@@ -6,7 +6,7 @@ categories: 网站设计
 tags:   php
 ---
 
-###缓存总览
+### 缓存总览
 
 + 浏览器缓存
 
@@ -19,7 +19,7 @@ tags:   php
 + mysql缓存
 
 
-###基准测试（原始php，没有任何优化）
+### 基准测试（原始php，没有任何优化）
 
 <table class="table table-bordered table-striped table-condensed">
     <tr>
@@ -50,29 +50,29 @@ tags:   php
    
 ![基础测试结果](/images/php_cache/ab_base.jpg)
 
-###使用Xcache
+### 使用Xcache
 
     wget http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz
 
-####编译参数
+#### 编译参数
 
     ./configure --prefix=/usr/local/php_extension --with-php-config=/usr/local/homebrew/Homebrew-homebrew-4e2b15c/bin/php-config --enable-xcache
 
 ![基础测试结果](/images/php_cache/ab_xcache.png)
 
-###使用APC
+### 使用APC
 
-####下载地址
+#### 下载地址
 
     http://pecl.php.net/package/apc
 
-####编译参数
+#### 编译参数
 
     ./configure --with-php-config=/usr/local/homebrew/Homebrew-homebrew-4e2b15c/bin/php-config --enable-apc --enable-apc-debug
 
 ![基础测试结果](/images/php_cache/ab_apc.png)
 
-###使用Zend Opcache
+### 使用Zend Opcache
 
 首先去官网下载最近的zendopcache7.05,三步走安装好
     

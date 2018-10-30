@@ -5,7 +5,7 @@ date:   2015-01-06  23:00
 categories: 基础运维
 tags:   mysql
 ---
-#是什么
+# 是什么
 
     sysbench是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种不同系统参数下的数据库负载情况。
     它主要包括以下几种方式的测试：
@@ -17,9 +17,9 @@ tags:   mysql
     6、数据库性能(OLTP基准测试)
     目前sysbench主要支持 MySQL,pgsql,oracle 这3种数据库
 
-#使用
+# 使用
 
-    root@lh:/usr/local/apache/htdocs# sysbench  
+    root@lh:/usr/local/apache/htdocs#  sysbench  
     Missing required command argument.
     Usage:
     sysbench [general-options]... --test=<test-name> [test-options]... command
@@ -49,7 +49,7 @@ tags:   mysql
     至此你就学会了如何使用sysbench
 
 
-#实例
+# 实例
 
     测试cpu
     sysbench --test=cpu  --cpu-max-prime=2000  run

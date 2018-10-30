@@ -6,7 +6,7 @@ categories: 网站设计
 tags:   php
 ---
 
-### 目的
+###  目的
 
 动态给类增加额外的功能，比子类更加灵活。
 
@@ -14,7 +14,7 @@ tags:   php
 ![decorator](/images/design_patterns/decorator.png)
 
 
-### 实现
+###  实现
 
 
     abstract class Component{

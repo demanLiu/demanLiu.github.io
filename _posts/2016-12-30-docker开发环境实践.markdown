@@ -7,7 +7,7 @@ tags:   php
 ---
 
 
-    #!/bin/bash
+    # !/bin/bash
     function run_docker(){
             if [[ $daemon = '-d' ]]
             then

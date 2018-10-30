@@ -6,7 +6,7 @@ categories: 大数据
 tags:   mongodb
 ---
 
-##安装(ubuntu下)
+## 安装(ubuntu下)
 
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 
@@ -21,26 +21,26 @@ tags:   mongodb
 
 安装完成后：service mongod start启动
 
-##mongodb结构组成
+## mongodb结构组成
 
 mongodb-org这是个元包，他会自动安装4部分：
 
-###1.mongodb-org-server
+### 1.mongodb-org-server
 
 这个包包含了mongod的守护进程和相关配置以及初始化脚本。mongod是mongodb私有守护进行，主要处理数据请求，管理数据权限，和一些后台操作。
 
-###2.mongodb-org-mongos
+### 2.mongodb-org-mongos
 包含mongos守护进程，是一个路由服务
 
-###3.mongodb-org-shell
+### 3.mongodb-org-shell
 
 mongo  shell,一个javascript编译器
 
-###4.mongodb-org-tools
+### 4.mongodb-org-tools
 
 包含一些工具: mongoimport bsondump, mongodump, mongoexport, mongofiles, mongooplog, mongoperf, mongorestore, mongostat, and mongotop.
 
-##存储结构
+## 存储结构
 
 
 mongodb的数据单元是文档，结构是bson（这个是二进制和json的混合词），一个专门存储文档的序列化格式，文档存放在collections中，一个collection存在一组相关联的文档。
@@ -48,11 +48,11 @@ mongodb的数据单元是文档，结构是bson（这个是二进制和json的�
 多组集合就可以认为是一个数据库。
 
 
-###mongodb使用(CRUD操作)
+### mongodb使用(CRUD操作)
 
 在终端下输入mongod进如mongodb的shell:  
 
-    root@lh:/home/liuhuan# mongo   
+    root@lh:/home/liuhuan#  mongo   
     MongoDB shell version: 2.6.5    
     connecting to: test   
     > 

@@ -5,7 +5,7 @@ date:   2015-01-11  13:00
 categories: 基础运维
 tags:   gnuplot
 ---
-#安装：
+# 安装：
     ubuntu：apt-get install  gnuplot 之后在安装x11
     centos:  yum install gnuplot
 
@@ -163,7 +163,7 @@ tags:   gnuplot
     gnuplot> set label ‘{/Symbol a}’
     各种希腊字母与特殊符号的输入方法请见安装包中gnuplot-4.0.0/docs/psdoc目录下的ps_guide.ps文件。
     另外还可参见：
-    http://t16web.lanl.gov/Kawano/gnuplot/label-e.html#4.3
+    http://t16web.lanl.gov/Kawano/gnuplot/label-e.html# 4.3
 
 5、gnuplot中如何插入Angstrom（埃）这个符号(A上面一个小圆圈)
 

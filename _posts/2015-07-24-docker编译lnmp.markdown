@@ -10,7 +10,7 @@ mac还要注意做端口映射要先开启
 
      VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port5000,tcp,,5000,,5000";
 
-###基于centos的镜像开始
+### 基于centos的镜像开始
 由于是最小安装很多都没有，先安装基本的工具
 
         yum install net-tools

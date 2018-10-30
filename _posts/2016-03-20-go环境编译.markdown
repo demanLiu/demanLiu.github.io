@@ -6,16 +6,16 @@ categories: 基础运维
 tags:   go
 ---
 
-## 1.获取源码
+##  1.获取源码
 
     git clone https://github.com/golang/go.git
 
-## 2.编译1.4版本
+##  2.编译1.4版本
 
   进入src,执行all.bash
   配置$GOROOT_BOOTSTRAP 
  
-## 3.切换到1.6版本
+##  3.切换到1.6版本
 
   进入src,执行all.bash
   配置$GOPATH ,OK,搞定 

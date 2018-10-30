@@ -6,7 +6,7 @@ categories: 网站设计
 tags:   go
 ---
 
-### 1.大括号不能另起一行
+###  1.大括号不能另起一行
 
     package main
 
@@ -21,7 +21,7 @@ tags:   go
 
 
 
-### 2.变量声明未使用(全局变量除外）
+###  2.变量声明未使用(全局变量除外）
 
 
     package main
@@ -37,7 +37,7 @@ tags:   go
     }
 
 
-### 3.import的包没有使用,_可以避免报错
+###  3.import的包没有使用,_可以避免报错
 
     package main
 
@@ -53,7 +53,7 @@ tags:   go
         _ = time.Now
     }
 
-### 4.短变量定义只能在函数内使用
+###  4.短变量定义只能在函数内使用
 
     package main
 
@@ -63,11 +63,11 @@ tags:   go
       myvar1 :=2 //ok
     }
 
-### 5.短变量定义不能重复定义
-### 6.不指明具体变量类型不能用nil作为初始值，因为他无法推测类型
-### 7.map没有cap()
-### 8.string不能复制nil
-### 9.switch case默认是break
+###  5.短变量定义不能重复定义
+###  6.不指明具体变量类型不能用nil作为初始值，因为他无法推测类型
+###  7.map没有cap()
+###  8.string不能复制nil
+###  9.switch case默认是break
 
     package main
 
@@ -87,5 +87,5 @@ tags:   go
         fmt.Println(isSpace(' '))  //prints false (not ok)
     }
 
-### 10.go不支持++i
+###  10.go不支持++i
 

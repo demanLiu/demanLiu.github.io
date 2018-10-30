@@ -6,7 +6,7 @@ categories: 网站设计
 tags:   php
 ---
 
-### 目的
+###  目的
 
 使多个对象都可以处理请求，从而避免请求发送者和接受者的耦合关系。
 
@@ -14,7 +14,7 @@ tags:   php
 ![Responsibility](/images/design_patterns/responsibility.png)
 
 
-### 实现
+###  实现
 
 
     abstract class Handler

@@ -5,7 +5,7 @@ date:   2014-11-25 22:40
 categories: 基础运维
 tags:   git
 ---
-##ssh-agent
+## ssh-agent
 
 由于公司和自己GitHub两个账号,为了防止搞混,我在生成ssh key时,分别生成默认的id_rsa和id_rsa_github两个。可说结果每次提交github的时候都要进行ssh-add，烦死了。
 奇怪，为啥以前不用呢？于是开始了解。
@@ -20,11 +20,11 @@ ssh-agent会输出一些环境变量，你需要执行来设置环境变量：
 
 会要求你输入密码短语，因为想要无密码，直接回车就可以了。ssh-agent只是一个session，重启就失效了。
 
-##keychain
+## keychain
 
 由于每次 `eval $(ssh-agent)`都会启动一个ssh-agent的副本，为此使用keychain进行优化，每个系统只使用一个，他的原理是从～/.bash_profile启动时会检查ssh-agent是否运行，如果没有就启动一个ssh-agent，并把环境变量记下来，之后操作就一样。
 
-##ssh config
+## ssh config
 
 除了上面两种，还可以利用ssh的配置文件。在～/.ssh/config 中加入配置项，如果没有config，就新建一个。
 

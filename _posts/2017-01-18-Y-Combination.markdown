@@ -919,12 +919,12 @@ make-recursive 函数就是我们一直想要的惰性求值的Y combinator，�
 
     (define (even? n)
       (if (= n 0)
-          #t
+          # t
           (odd? (- n 1))))
 
     (define (odd? n)
       (if (= n 0)
-          #f
+          # f
           (even? (- n 1))))
       
       
@@ -938,7 +938,7 @@ Wikipedia的文章Y combinator读起来比较难，不过里面有一些有趣�
 The Little Schemer，第4版，作者Dan Friedman和Matthias Felleisen。第9章有一个Y combinator的推导，让我开始对这个主题感兴趣。
 
 Y in Practical Programs，作者Bruce McAdams，在前一节中有提到。
-### 实例
+###  实例
 
 
 
@@ -964,4 +964,4 @@ Y in Practical Programs，作者Bruce McAdams，在前一节中有提到。
 
 
 
-http://www.rosettacode.org/wiki/Y_combinator#Common_Lisp
+http://www.rosettacode.org/wiki/Y_combinator# Common_Lisp

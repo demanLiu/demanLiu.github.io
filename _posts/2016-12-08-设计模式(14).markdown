@@ -6,14 +6,14 @@ categories: 网站设计
 tags:   php
 ---
 
-### 目的
+###  目的
 
 请求封装成一个对象，用不同的请求对客户端进行参数化，对请求排队或记录日志，以及可以撤销的操作。
 
 ![command](/images/design_patterns/command.png)
 
 
-### 实现
+###  实现
 
     abstract class Command
     {

@@ -6,7 +6,7 @@ categories: 网站设计
 tags:   php
 ---
 
-### 目的
+###  目的
 
 
 抽象部分和实现部分分离，各自独立的变化。
@@ -16,14 +16,14 @@ tags:   php
 ![Bridge](/images/design_patterns/bridge.png)
 
 
-### 优点
+###  优点
 
 1. 分离接口及其实现部分
 2. 提高可扩充性
 3. 实现细节对客户端透明
 
 
-### 实现
+###  实现
 
 
 

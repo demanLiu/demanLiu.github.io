@@ -5,7 +5,7 @@ date: 2014-11-28  13:50
 categories: 基础运维
 tags:   apache
 ---
-##简析http.conf
+## 简析http.conf
 1. ServerRoot：服务器的基础目录，一般来说它将包含conf/和logs/子目录，其它配置文件的相对路径即基于此目录。默认为安装目录，不需更改。
 
         语法：ServerRoot directory-path
@@ -100,7 +100,7 @@ tags:   apache
         ExecCGI 　允许使用mod_cgi执行CGI脚本。
         FollowSymLinks 　服务器允许在此目录中使用符号连接，如果此配置位于<Location>配置段中，则会被忽略。
         Includes 　允许使用mod_include提供的服务器端包含。
-        IncludesNOEXEC 　允许服务器端包含，但禁用"#exec cmd"和"#exec cgi"，但仍可以从ScriptAlias目录使用"#include virtual"虚拟CGI脚本。
+        IncludesNOEXEC 　允许服务器端包含，但禁用"# exec cmd"和"# exec cgi"，但仍可以从ScriptAlias目录使用"# include virtual"虚拟CGI脚本。
         Indexes 　如果一个映射到目录的URL被请求，而此目录中又没有DirectoryIndex(例如：index.html)，那么服务器会返回由mod_autoindex生成的一个格式化后的目录列表。
         MultiViews 　允许使用mod_negotiation提供内容协商的"多重视图"(MultiViews)。
         SymLinksIfOwnerMatch 　服务器仅在符号连接与其目的目录或文件的拥有者具有相同的uid时才使用它。 如果此配置出现在<Location>配置段中，则将被忽略。
@@ -262,110 +262,110 @@ Shell风格(fnmatch())的通配符可以用于按照字母顺序一次包含多�
  
  29. 设置动态加载的DSO模块
   
-\#如果需要提供基于文本文件的认证,加载此模块，否则注释掉    
+\# 如果需要提供基于文本文件的认证,加载此模块，否则注释掉    
 LoadModule authn_file_module modules/mod_authn_file.so    
-\#如果需要提供基于DBM文件的认证,加载此模块,否则注释掉  
-\#LoadModule authn_dbm_module modules/mod_authn_dbm.so  
-\#如果需要提供匿名用户认证,加载此模块,否则注释掉  
-\#LoadModule authn_anon_module modules/mod_authn_anon.so  
-\#如果需要提供基于SQL数据库的认证,加载此模块,否则注释掉  
-\#LoadModule authn_dbd_module modules/mod_authn_dbd.so  
-\#如果需要在未正确配置认证模块的情况下简单拒绝一切认证信息,加载此模块,否则注释掉  
+\# 如果需要提供基于DBM文件的认证,加载此模块,否则注释掉  
+\# LoadModule authn_dbm_module modules/mod_authn_dbm.so  
+\# 如果需要提供匿名用户认证,加载此模块,否则注释掉  
+\# LoadModule authn_anon_module modules/mod_authn_anon.so  
+\# 如果需要提供基于SQL数据库的认证,加载此模块,否则注释掉  
+\# LoadModule authn_dbd_module modules/mod_authn_dbd.so  
+\# 如果需要在未正确配置认证模块的情况下简单拒绝一切认证信息,加载此模块,否则注释掉  
 LoadModule authn_default_module modules/mod_authn_default.so  
-\#此模块提供基于主机名、IP地址、请求特征的访问控制,Allow、Deny指令需要,推荐加载。  
+\# 此模块提供基于主机名、IP地址、请求特征的访问控制,Allow、Deny指令需要,推荐加载。  
 LoadModule authz_host_module modules/mod_authz_host.so  
-\#如果需要使用纯文本文件为组提供授权支持,加载此模块,否则注释掉  
-\#LoadModule authz_groupfile_module modules/mod_authz_groupfile.so  
-\#如果需要提供基于每个用户的授权支持,加载此模块,否则注释掉  
+\# 如果需要使用纯文本文件为组提供授权支持,加载此模块,否则注释掉  
+\# LoadModule authz_groupfile_module modules/mod_authz_groupfile.so  
+\# 如果需要提供基于每个用户的授权支持,加载此模块,否则注释掉  
 LoadModule authz_user_module modules/mod_authz_user.so  
-\#如果需要使用DBM文件为组提供授权支持,加载此模块,否则注释掉  
-\#LoadModule authz_dbm_module modules/mod_authz_dbm.so  
-\#如果需要基于文件的所有者进行授权,加载此模块,否则注释掉  
-\#LoadModule authz_owner_module modules/mod_authz_owner.so  
-\#如果需要在未正确配置授权支持模块的情况下简单拒绝一切授权请求,加载此模块,否则注释掉  
+\# 如果需要使用DBM文件为组提供授权支持,加载此模块,否则注释掉  
+\# LoadModule authz_dbm_module modules/mod_authz_dbm.so  
+\# 如果需要基于文件的所有者进行授权,加载此模块,否则注释掉  
+\# LoadModule authz_owner_module modules/mod_authz_owner.so  
+\# 如果需要在未正确配置授权支持模块的情况下简单拒绝一切授权请求,加载此模块,否则注释掉  
 LoadModule authz_default_module modules/mod_authz_default.so  
-\#如果需要提供基本的HTTP认证,加载此模块,否则注释掉,此模块至少需要同时加载一个认证支持模块和一个授权支持模块  
+\# 如果需要提供基本的HTTP认证,加载此模块,否则注释掉,此模块至少需要同时加载一个认证支持模块和一个授权支持模块  
 LoadModule auth_basic_module modules/mod_auth_basic.so  
-\#如果需要提供HTTP MD5摘要认证,加载此模块,否则注释掉,此模块至少需要同时加载一个认证支持模块和一个授权支持模块  
-\#LoadModule auth_digest_module modules/mod_auth_digest.so  
-\#此模块提供文件描述符缓存支持,从而提高Apache性能,推荐加载,但请小心使用  
+\# 如果需要提供HTTP MD5摘要认证,加载此模块,否则注释掉,此模块至少需要同时加载一个认证支持模块和一个授权支持模块  
+\# LoadModule auth_digest_module modules/mod_auth_digest.so  
+\# 此模块提供文件描述符缓存支持,从而提高Apache性能,推荐加载,但请小心使用  
 LoadModule file_cache_module modules/mod_file_cache.so  
-\#此模块提供基于URI键的内容动态缓存(内存或磁盘),从而提高Apache性能,必须与mod_disk_cache/mod_mem_cache同时使用,推荐加载  
+\# 此模块提供基于URI键的内容动态缓存(内存或磁盘),从而提高Apache性能,必须与mod_disk_cache/mod_mem_cache同时使用,推荐加载  
 LoadModule cache_module modules/mod_cache.so  
-\#此模块为mod_cache提供基于磁盘的缓存管理,推荐加载  
+\# 此模块为mod_cache提供基于磁盘的缓存管理,推荐加载  
 LoadModule disk_cache_module modules/mod_disk_cache.so  
-\#此模块为mod_cache提供基于内存的缓存管理,推荐加载  
+\# 此模块为mod_cache提供基于内存的缓存管理,推荐加载  
 LoadModule mem_cache_module modules/mod_mem_cache.so  
-\#如果需要管理SQL数据库连接，为需要数据库功能的模块提供支持,加载此模块,否则注释掉(推荐)  
-\#LoadModule dbd_module modules/mod_dbd.so  
-\#此模块将所有I/O操作转储到错误日志中,会导致在日志中写入及其海量的数据,只建议在发现问题并进行调试的时候使用  
-\#LoadModule dumpio_module modules/mod_dumpio.so  
-\#如果需要使用外部程序作为过滤器,加载此模块(不推荐),否则注释掉  
-\#LoadModule ext_filter_module modules/mod_ext_filter.so  
-\#如果需要实现服务端包含文档(SSI)处理,加载此模块(不推荐),否则注释掉  
-\#LoadModule include_module modules/mod_include.so  
-\#如果需要根据上下文实际情况对输出过滤器进行动态配置,加载此模块,否则注释掉  
+\# 如果需要管理SQL数据库连接，为需要数据库功能的模块提供支持,加载此模块,否则注释掉(推荐)  
+\# LoadModule dbd_module modules/mod_dbd.so  
+\# 此模块将所有I/O操作转储到错误日志中,会导致在日志中写入及其海量的数据,只建议在发现问题并进行调试的时候使用  
+\# LoadModule dumpio_module modules/mod_dumpio.so  
+\# 如果需要使用外部程序作为过滤器,加载此模块(不推荐),否则注释掉  
+\# LoadModule ext_filter_module modules/mod_ext_filter.so  
+\# 如果需要实现服务端包含文档(SSI)处理,加载此模块(不推荐),否则注释掉  
+\# LoadModule include_module modules/mod_include.so  
+\# 如果需要根据上下文实际情况对输出过滤器进行动态配置,加载此模块,否则注释掉  
 LoadModule filter_module modules/mod_filter.so  
-\#如果需要服务器在将输出内容发送到客户端以前进行压缩以节约带宽,加载此模块(推荐),否则注释掉  
+\# 如果需要服务器在将输出内容发送到客户端以前进行压缩以节约带宽,加载此模块(推荐),否则注释掉  
 LoadModule deflate_module modules/mod_deflate.so  
-\#如果需要记录日志和定制日志文件格式,加载此模块(推荐),否则注释掉  
+\# 如果需要记录日志和定制日志文件格式,加载此模块(推荐),否则注释掉  
 LoadModule log_config_module modules/mod_log_config.so  
-\#如果需要对每个请求的输入/输出字节数以及HTTP头进行日志记录,加载此模块,否则注释掉  
-\#LoadModule logio_module modules/mod_logio.so  
-\#如果允许Apache修改或清除传送到CGI脚本和SSI页面的环境变量,加载此模块,否则注释掉  
+\# 如果需要对每个请求的输入/输出字节数以及HTTP头进行日志记录,加载此模块,否则注释掉  
+\# LoadModule logio_module modules/mod_logio.so  
+\# 如果允许Apache修改或清除传送到CGI脚本和SSI页面的环境变量,加载此模块,否则注释掉  
 LoadModule env_module modules/mod_env.so  
-\#如果允许通过配置文件控制HTTP的"Expires:"和"Cache-Control:"头内容,加载此模块(推荐),否则注释掉  
+\# 如果允许通过配置文件控制HTTP的"Expires:"和"Cache-Control:"头内容,加载此模块(推荐),否则注释掉  
 LoadModule expires_module modules/mod_expires.so  
-\#如果允许通过配置文件控制任意的HTTP请求和应答头信息,加载此模块,否则注释掉  
+\# 如果允许通过配置文件控制任意的HTTP请求和应答头信息,加载此模块,否则注释掉  
 LoadModule headers_module modules/mod_headers.so  
-\#如果需要实现RFC1413规定的ident查找,加载此模块(不推荐),否则注释掉  
-\#LoadModule ident_module modules/mod_ident.so  
-\#如果需要根据客户端请求头字段设置环境变量,加载此模块,否则注释掉  
+\# 如果需要实现RFC1413规定的ident查找,加载此模块(不推荐),否则注释掉  
+\# LoadModule ident_module modules/mod_ident.so  
+\# 如果需要根据客户端请求头字段设置环境变量,加载此模块,否则注释掉  
 LoadModule setenvif_module modules/mod_setenvif.so  
-\#此模块是mod_proxy的扩展,提供Apache JServ Protocol支持,只在必要时加载  
-\#LoadModule proxy_ajp_module modules/mod_proxy_ajp.so  
-\#此模块是mod_proxy的扩展,提供负载均衡支持,只在必要时加载  
-\#LoadModule proxy_balancer_module modules/mod_proxy_balancer.so  
-\#如果需要根据文件扩展名决定应答的行为(处理器/过滤器)和内容(MIME类型/语言/字符集/编码),加载此模块,否则注释掉  
+\# 此模块是mod_proxy的扩展,提供Apache JServ Protocol支持,只在必要时加载  
+\# LoadModule proxy_ajp_module modules/mod_proxy_ajp.so  
+\# 此模块是mod_proxy的扩展,提供负载均衡支持,只在必要时加载  
+\# LoadModule proxy_balancer_module modules/mod_proxy_balancer.so  
+\# 如果需要根据文件扩展名决定应答的行为(处理器/过滤器)和内容(MIME类型/语言/字符集/编码),加载此模块,否则注释掉  
 LoadModule mime_module modules/mod_mime.so  
-\#如果允许Apache提供DAV协议支持,加载此模块,否则注释掉  
-\#LoadModule dav_module modules/mod_dav.so  
-\#此模块生成描述服务器状态的Web页面,只建议在追踪服务器性能和问题时加载  
-\#LoadModule status_module modules/mod_status.so  
-\#如果需要自动对目录中的内容生成列表(类似于"ls"或"dir"命令),加载此模块(会带来安全问题,不推荐),否则注释掉  
-\#LoadModule autoindex_module modules/mod_autoindex.so  
-\#如果需要服务器发送自己包含HTTP头内容的文件,加载此模块,否则注释掉  
-\#LoadModule asis_module modules/mod_asis.so  
-\#如果需要生成Apache配置情况的Web页面,加载此模块(会带来安全问题,不推荐),否则注释掉  
-\#LoadModule info_module modules/mod_info.so  
-\#如果需要在非线程型MPM(prefork)上提供对CGI脚本执行的支持,加载此模块,否则注释掉  
-\#LoadModule cgi_module modules/mod_cgi.so  
-\#此模块在线程型MPM(worker)上用一个外部CGI守护进程执行CGI脚本,如果正在多线程模式下使用CGI程序,推荐替换mod_cgi加载,否则注释掉  
-\#LoadModule cgid_module modules/mod_cgid.so  
-\#此模块为mod_dav访问服务器上的文件系统提供支持,如果加载mod_dav,则也应加载此模块,否则注释掉  
-\#LoadModule dav_fs_module modules/mod_dav_fs.so  
-\#如果需要提供大批量虚拟主机的动态配置支持,加载此模块,否则注释掉  
-\#LoadModule vhost_alias_module modules/mod_vhost_alias.so  
-\#如果需要提供内容协商支持(从几个有效文档中选择一个最匹配客户端要求的文档),加载此模块(推荐),否则注释掉  
+\# 如果允许Apache提供DAV协议支持,加载此模块,否则注释掉  
+\# LoadModule dav_module modules/mod_dav.so  
+\# 此模块生成描述服务器状态的Web页面,只建议在追踪服务器性能和问题时加载  
+\# LoadModule status_module modules/mod_status.so  
+\# 如果需要自动对目录中的内容生成列表(类似于"ls"或"dir"命令),加载此模块(会带来安全问题,不推荐),否则注释掉  
+\# LoadModule autoindex_module modules/mod_autoindex.so  
+\# 如果需要服务器发送自己包含HTTP头内容的文件,加载此模块,否则注释掉  
+\# LoadModule asis_module modules/mod_asis.so  
+\# 如果需要生成Apache配置情况的Web页面,加载此模块(会带来安全问题,不推荐),否则注释掉  
+\# LoadModule info_module modules/mod_info.so  
+\# 如果需要在非线程型MPM(prefork)上提供对CGI脚本执行的支持,加载此模块,否则注释掉  
+\# LoadModule cgi_module modules/mod_cgi.so  
+\# 此模块在线程型MPM(worker)上用一个外部CGI守护进程执行CGI脚本,如果正在多线程模式下使用CGI程序,推荐替换mod_cgi加载,否则注释掉  
+\# LoadModule cgid_module modules/mod_cgid.so  
+\# 此模块为mod_dav访问服务器上的文件系统提供支持,如果加载mod_dav,则也应加载此模块,否则注释掉  
+\# LoadModule dav_fs_module modules/mod_dav_fs.so  
+\# 如果需要提供大批量虚拟主机的动态配置支持,加载此模块,否则注释掉  
+\# LoadModule vhost_alias_module modules/mod_vhost_alias.so  
+\# 如果需要提供内容协商支持(从几个有效文档中选择一个最匹配客户端要求的文档),加载此模块(推荐),否则注释掉  
 LoadModule negotiation_module modules/mod_negotiation.so  
-\#如果需要指定目录索引文件以及为目录提供"尾斜杠"重定向,加载此模块(推荐),否则注释掉  
+\# 如果需要指定目录索引文件以及为目录提供"尾斜杠"重定向,加载此模块(推荐),否则注释掉  
 LoadModule dir_module modules/mod_dir.so  
-\#如果需要处理服务器端图像映射,加载此模块,否则注释掉  
-\#LoadModule imagemap_module modules/mod_imagemap.so  
-\#如果需要针对特定的媒体类型或请求方法执行CGI脚本,加载此模块,否则注释掉  
-\#LoadModule actions_module modules/mod_actions.so  
-\#如果希望服务器自动纠正URL中的拼写错误,加载此模块(推荐),否则注释掉  
+\# 如果需要处理服务器端图像映射,加载此模块,否则注释掉  
+\# LoadModule imagemap_module modules/mod_imagemap.so  
+\# 如果需要针对特定的媒体类型或请求方法执行CGI脚本,加载此模块,否则注释掉  
+\# LoadModule actions_module modules/mod_actions.so  
+\# 如果希望服务器自动纠正URL中的拼写错误,加载此模块(推荐),否则注释掉  
 LoadModule speling_module modules/mod_speling.so  
-\#如果允许在URL中通过"/~username"形式从用户自己的主目录中提供页面,加载此模块,否则注释掉  
-\#LoadModule userdir_module modules/mod_userdir.so  
-\#此模块提供从文件系统的不同部分到文档树的映射和URL重定向,推荐加载  
+\# 如果允许在URL中通过"/~username"形式从用户自己的主目录中提供页面,加载此模块,否则注释掉  
+\# LoadModule userdir_module modules/mod_userdir.so  
+\# 此模块提供从文件系统的不同部分到文档树的映射和URL重定向,推荐加载  
 LoadModule alias_module modules/mod_alias.so  
-\#如果需要基于一定规则实时重写URL请求,加载此模块(推荐),否则注释掉  
+\# 如果需要基于一定规则实时重写URL请求,加载此模块(推荐),否则注释掉  
 LoadModule rewrite_module modules/mod_rewrite.so   
 
-#实例
+# 实例
 
-    #设置WEB文档根目录的默认属性
+    # 设置WEB文档根目录的默认属性
     DocumentRoot "/usr/local/apache-2.2.6/htdocs"    
     <Directory />
         Options FollowSymLinks
@@ -373,92 +373,92 @@ LoadModule rewrite_module modules/mod_rewrite.so
         Order deny,allow
         Deny from all
     </Directory>
-    #设置DocumentRoot指定目录的属性  
+    # 设置DocumentRoot指定目录的属性  
     <Directory "/usr/local/apache-2.2.6/htdocs">
         Options FollowSymLinks
         AllowOverride None
         Order allow,deny
         Allow from all
     </Directory>
-    #设置默认目录资源列表文件
+    # 设置默认目录资源列表文件
     <IfModule dir_module>
         DirectoryIndex index.html
     </IfModule>
-    #拒绝对.ht开头文件的访问,以保护.htaccess文件
+    # 拒绝对.ht开头文件的访问,以保护.htaccess文件
     <FilesMatch "^\.ht">
         Order allow,deny
         Deny from all
         Satisfy All
     </FilesMatch>
     <IfModule log_config_module>
-    #定义访问日志的格式
+    # 定义访问日志的格式
     LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
     LogFormat "%h %l %u %t \"%r\" %>s %b" common
     <IfModule logio_module>
     LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
     </IfModule>
-    #指定访问日志及使用的格式
+    # 指定访问日志及使用的格式
     CustomLog logs/access_log combined
     </IfModule>
-    #设定默认CGI脚本目录及别名
+    # 设定默认CGI脚本目录及别名
     ScriptAlias /cgi-bin/ "/usr/local/apache-2.2.6/cgi-bin/"
-    #在以线程式MPM(worker)运行的Apache中设置用来与CGI守护进程通信的套接字文件名前缀
+    # 在以线程式MPM(worker)运行的Apache中设置用来与CGI守护进程通信的套接字文件名前缀
     <IfModule cgid_module>
     Scriptsock logs/cgisock
     </IfModule>
-    #设定默认CGI脚本目录的属性
+    # 设定默认CGI脚本目录的属性
     <Directory "/usr/local/apache-2.2.6/cgi-bin">
     AllowOverride None
     Options None
     Order allow,deny
     Allow from all
     </Directory>
-    #设定默认MIME内容类型
+    # 设定默认MIME内容类型
     DefaultType text/plain
     <IfModule mime_module>
-    ##指定MIME类型映射文件
+    ## 指定MIME类型映射文件
     TypesConfig conf/mime.types
-    #增加.Z .tgz的类型映射
+    # 增加.Z .tgz的类型映射
     AddType application/x-compress .Z
     AddType application/x-gzip .gz .tgz
     </IfModule>
-    #启用内存映射
+    # 启用内存映射
     EnableMMAP on
-    ##使用操作系统内核的sendfile支持来将文件发送到客户端
+    ## 使用操作系统内核的sendfile支持来将文件发送到客户端
     EnableSendfile on
-    #指定多路处理模块(MPM)配置文件并将其附加到主配置文件
+    # 指定多路处理模块(MPM)配置文件并将其附加到主配置文件
     Include conf/extra/httpd-mpm.conf
-    #指定多语言错误应答配置文件并将其附加到主配置文件
+    # 指定多语言错误应答配置文件并将其附加到主配置文件
     Include conf/extra/httpd-multilang-errordoc.conf
-    #指定目录列表配置文件并将其附加到主配置文件
-    #Include conf/extra/httpd-autoindex.conf
-    #指定语言配置文件并将其附加到主配置文件
+    # 指定目录列表配置文件并将其附加到主配置文件
+    # Include conf/extra/httpd-autoindex.conf
+    # 指定语言配置文件并将其附加到主配置文件
     Include conf/extra/httpd-languages.conf
-    #指定用户主目录配置文件并将其附加到主配置文件
-    #Include conf/extra/httpd-userdir.conf
-    #指定用于服务器信息和状态显示的配置文件并将其附加到主配置文件
-    #Include conf/extra/httpd-info.conf
-    #指定提供Apache文档访问的配置文件并将其附加到配置文件
-    #Include conf/extra/httpd-manual.conf
-    #指定DAV配置文件并将其附加到主配置文件
-    #Include conf/extra/httpd-dav.conf
-    #指定与Apache服务自身相关的配置文件并将其附加到主配置文件
+    # 指定用户主目录配置文件并将其附加到主配置文件
+    # Include conf/extra/httpd-userdir.conf
+    # 指定用于服务器信息和状态显示的配置文件并将其附加到主配置文件
+    # Include conf/extra/httpd-info.conf
+    # 指定提供Apache文档访问的配置文件并将其附加到配置文件
+    # Include conf/extra/httpd-manual.conf
+    # 指定DAV配置文件并将其附加到主配置文件
+    # Include conf/extra/httpd-dav.conf
+    # 指定与Apache服务自身相关的配置文件并将其附加到主配置文件
     Include conf/extra/httpd-default.conf
-    #指定mod_deflate压缩模块配置文件并将其附加到主配置文件
+    # 指定mod_deflate压缩模块配置文件并将其附加到主配置文件
     Include conf/extra/httpd-deflate.conf
-    #指定mod_expires模块配置文件并将其附加到主配置文件
+    # 指定mod_expires模块配置文件并将其附加到主配置文件
     Include conf/extra/httpd-expires.conf
-    #    #指定虚拟主机配置文件并将其附加到主配置文件
-    #Include conf/extra/httpd-vhosts.conf
-    #指定SSL配置文件并将其附加到主配置文件
+    #     # 指定虚拟主机配置文件并将其附加到主配置文件
+    # Include conf/extra/httpd-vhosts.conf
+    # 指定SSL配置文件并将其附加到主配置文件
     Include conf/extra/httpd-ssl.conf
-    #    #SSL默认配置
+    #     # SSL默认配置
     <IfModule ssl_module>
     SSLRandomSeed startup builtin
     SSLRandomSeed connect builtin
     </IfModule>
 
-    #配置多路处理模块(MPM) httpd-mpm.conf
+    # 配置多路处理模块(MPM) httpd-mpm.conf
     首先说一下原理:
     prefork模式
     这个多路处理模块(MPM)实现了一个非线程型的、预派生的web服务器，它的工作方式类似于Apache 1.3。它适合于没有线程安全库，需要避免线程兼容性问题的系统。它是要求将
@@ -469,7 +469,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     此多路处理模块(MPM)使网络服务器支持混合的多线程多进程。由于使用线程来处理请求，所以可以处理海量请求，而系统资源的开销小于基于进程的MPM。但是，它也使用了多进
     程，每个进程又有多个线程，以获得基于进程的MPM的稳定性。
     控制这个MPM的最重要的指令是，控制每个子进程允许建立的线程数的ThreadsPerChild指令，和控制允许建立的总线程数的MaxClients指令
-    #设置prefork多路处理模块
+    # 设置prefork多路处理模块
     <IfModule mpm_prefork_module>
     StartServers          5
     MinSpareServers       5
@@ -492,7 +492,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     给进程一个有限寿命，从而有助于当服务器负载减轻的时候减少活动进程的数量。
     如果设置为非零值，建议设为10000-30000之间的一个值。
     公式：MaxClients<=ServerLimit
-    #设置worker多路处理模块
+    # 设置worker多路处理模块
     <IfModule mpm_worker_module>
     StartServers          5
     ServerLimit          20
@@ -524,7 +524,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     ThreadLimit >= ThreadsPerChild
     MaxClients <= ServerLimit * ThreadsPerChild 必须是ThreadsPerChild的倍数
     MaxSpareThreads >= MinSpareThreads+ThreadsPerChild
-    #配置Apache服务器默认设置 httpd-default.conf
+    # 配置Apache服务器默认设置 httpd-default.conf
     Timeout 300
     KeepAlive Off
     MaxKeepAliveRequests 100
@@ -551,7 +551,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     创建一个指向 ServerAdmin的"mailto:"部分。建议使用默认值Off。
     HostnameLookups：设置是否启用对客户端IP的DNS查找，可选值为On | Off | Double。DNS查询会造成明显的时间消耗，建议设置为Off。
 
-    #配置mod_deflate压缩模块 httpd-deflate.conf
+    # 配置mod_deflate压缩模块 httpd-deflate.conf
     mod_deflate模块提供了DEFLATE输出过滤器，允许服务器在将输出内容发送到客户端以前进行压缩，以节约带宽。
     编辑mod_deflate压缩模块设置文件：
     <IfModule mod_deflate.c>
@@ -559,25 +559,25 @@ LoadModule rewrite_module modules/mod_rewrite.so
     DeflateWindowSize 15
     DeflateBufferSize 8096
     DeflateCompressionLevel 8
-    #调试时去掉下面5行前的注释符，用以记录压缩日志
-    #DeflateFilterNote Input instream
-    #DeflateFilterNote Output outstream
-    #DeflateFilterNote Ratio ratio
-    #LogFormat '"%r" %b %{outstream}n/%{instream}n (%{ratio}n%%) "%{User-agent}i"' deflate
-    #CustomLog logs/deflate_log deflate
-    #插入DEFLATE过滤器，以启用输出压缩
+    # 调试时去掉下面5行前的注释符，用以记录压缩日志
+    # DeflateFilterNote Input instream
+    # DeflateFilterNote Output outstream
+    # DeflateFilterNote Ratio ratio
+    # LogFormat '"%r" %b %{outstream}n/%{instream}n (%{ratio}n%%) "%{User-agent}i"' deflate
+    # CustomLog logs/deflate_log deflate
+    # 插入DEFLATE过滤器，以启用输出压缩
     　SetOutputFilter DEFLATE
-    # Netscape 4.x 有一些问题，仅压缩txt/html类型
+    #  Netscape 4.x 有一些问题，仅压缩txt/html类型
     BrowserMatch ^Mozilla/4 gzip-only-text/html
-    # Netscape 4.06-4.08不能处理任何压缩内容，不进行压缩
+    #  Netscape 4.06-4.08不能处理任何压缩内容，不进行压缩
     BrowserMatch ^Mozilla/4.0[678] no-gzip
-    # MSIE 会伪装成 Netscape ，但是事实上它没有问题
+    #  MSIE 会伪装成 Netscape ，但是事实上它没有问题
     BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-    # 设置图片、mp3、压缩格式文件等不需要进行压缩内容
+    #  设置图片、mp3、压缩格式文件等不需要进行压缩内容
     SetEnvIfNoCase Request_URI .(?:gif|jpe?g|png)$ no-gzip dont-vary
     SetEnvIfNoCase Request_URI .(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
     SetEnvIfNoCase Request_URI .(?:pdf|mov|avi|mp3|mp4|rm)$ no-gzip dont-vary
-    # 确保代理不会发送错误的内容
+    #  确保代理不会发送错误的内容
     Header append Vary User-Agent env=!dont-vary
     </IfModule>
     DeflateMemLevel：指定zlib在压缩时最多可以使用多少内存，取值范围在1到9之间。
@@ -594,12 +594,12 @@ LoadModule rewrite_module modules/mod_rewrite.so
     BrowserMatch：基于User-Agent头有条件地设置环境变量。
     SetEnvIfNoCase：根据大小写无关的客户端请求属性设置环境变量。
     Headers：配置HTTP应答头。这个指令可以替换、合并、删除HTTP应答头。应答头紧跟在内容处理器和输出过滤器完工之后生成，这时候才能对头进行修改。
-    #配置mod_expires模块
+    # 配置mod_expires模块
     这个模块控制服务器应答时的Expires头内容和Cache-Control头的max-age指令。有效期(expiration date)可以设置为相对于源文件的最后修改时刻或者客户端的访问时刻。这些
     HTTP头向客户端表明了文档的有效性和持久性。如果有缓存，文档就可以从缓存(除已经过期)而不是从服务器读取。接着，客户端考察缓存中的副本，看看是否过期或者失效，以
     决定是否必须从服务器获得更新。
     编辑mod_expires设置文件：httpd-expires.conf
-    # mod_expires设置文件
+    #  mod_expires设置文件
     <IfModule mod_expires.c>
     ExpiresActive on
     　    ExpiresDefault A300
@@ -624,8 +624,8 @@ LoadModule rewrite_module modules/mod_rewrite.so
     ExpiresDefault：设置其作用范围内的所有文档的默认有效期的计算方法，它可以被ExpiresByType指令基于MIME类型被改写。
     语法为：ExpiresDefault <code>seconds
     <code>seconds同ExpiresByType一致。
-    #最后配置一下虚拟主机  httpd-vhost.conf
-    #这里重点介绍一下基于多端口的配置
+    # 最后配置一下虚拟主机  httpd-vhost.conf
+    # 这里重点介绍一下基于多端口的配置
     NameVirtualHost *:81
     NameVirtualHost *:82
     NameVirtualHost *:83
@@ -640,7 +640,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     <VirtualHost *:82>
     <Directory "/www2" >
     Options FollowSymLinks
-    #Deny from all
+    # Deny from all
     Allow from all
     </Directory>
     ServerAdmin jafy@jafy00.com
@@ -652,7 +652,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
     </VirtualHost>
 
 
-#安全设置
+# 安全设置
 
 1. 模块尽可能精简
 2. 禁用目录浏览和符号链接追踪
