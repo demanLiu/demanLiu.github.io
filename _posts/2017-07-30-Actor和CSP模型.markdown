@@ -6,4 +6,23 @@ categories: 网站设计
 tags:   go
 ---
 
-###  概念
+#  概念
+
+Actor和CSP都是并发模型，akka/erlang采用actor，而go则采用csp，两者都是通过消息传递来进行线程通信，而非内存共享，内存共享必然要引入锁的概念增加了不少复杂度
+
+
+## Actor
+
+主题是一个个actor，也就是一个个处理单元，每个actor有 state，behavior mailbox三部分组成
+
+    state actor变量信息，actor自己管理，无需锁
+    behavior  actor计算单元，根据接收的消息改变状态
+    mailbox actor之间的通信桥梁，本质是一个队列，发送方放到接受方邮箱，接受方一次读取，邮箱理论要无穷大
+
+每个actor占用内存很少，在处理过程只会阻塞自我，不会阻塞别人，所以能获得极高的并发
+
+
+## CSP
+
+actor和actor之间还是存在耦合，引入channel，worker发送给channel，接受者去channel获取数据，类似发布订阅模式，进行了worker之间的解耦
+
