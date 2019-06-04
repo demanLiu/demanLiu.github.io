@@ -1,8 +1,119 @@
 ---
 layout: post
 title:  "ansible使用"
-date:   2015-07-26  17:23
-categories: 网站设计
+date:   2015-07-25  17:23
+categories: 基础运维
 tags:   php
 ---
+## 目的
 
+现在很多都是集群，很多操作都要复制几次，ansible可以对机器进行分组，同时操作一个组的机器
+
+## 使用
+
+### ansible  ssh免登录
+
+    1. ssh-keyscan  ip lists>> /root/.ssh/known_hosts    -- 公钥
+    2. ssh-keygen -t rsa -b 2048 -P '' -f /root/.ssh/id_rsa --私钥
+    3. /etc/ansible/hosts     
+        192.168.56.102 ansible_ssh_pass=liuhuan
+        192.168.56.103 ansible_ssh_pass=liuhuan
+        192.168.56.104 ansible_ssh_pass=liuhuan
+
+
+    4./etc/ansible/ssh-addkey.yml 
+        ---
+        - hosts: all
+        gather_facts: no
+
+        tasks:
+
+        - name: install ssh key
+            authorized_key: user=root 
+                            key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
+                            state=present
+    5.ansible-playbook -i hosts ssh-addkey.yml
+
+    
+ ansible是基于模块工作的
+
+### 常用模块(module_name)：
+
+
+1)command：默认模块，可省略。在远程主机上进行操作命令
+-a 'COMMAND'
+
+注意：comand模块的参数非key=value格式，直接给出要执行的命令
+
+[root@localhost ~]# ansible all -m command -a 'ifconfig'
+
+2)user：
+
+-a 'name= state={present(创建)|absent(删除)} force=(是否强制操作删除家目录) system= uid= shell= home='
+
+[root@localhost ~]# ansible all -m user -a 'name=ansible state=present'
+
+3)group：
+
+-a 'name= state={present|absent} gid= system=(系统组)'
+
+[root@localhost ~]# ansible all -m group -a 'name=mygroup state=presentsystem=true'
+
+4)cron：
+
+-a 'name= state= minute= hour= day= month= weekday= job='
+
+[root@localhost ~]# ansible all -m cron -a 'name='Time' state=presentminute='*/5' job='/usr/sbin/ntpdate 172.168.0.1 &> /dev/null''
+
+5)ping：无参数
+
+[root@localhost ~]# ansible all -m ping
+
+6)file：文件管理
+
+-a 'path= mode= owner= group= state={file|directory|link|hard|touch|absent} src=(link，链接至何处)'
+
+[root@localhost ~]# ansible all -m file -a 'path=/tmp/testdirstate=directory'
+
+[root@localhost ~]# ansible all -m file -a 'path=/tmp/test.txt state=touchmod=600 owner=user1'
+
+
+7)copy：
+
+-a 'dest=(远程主机上路径) src=(本地主机路径) content=(直接指明内容) owner= group= mode='
+
+
+[root@localhosttmp]# ansible web -m copy -a 'src=/etc/yum.repos.d/aliyun.repodest=/etc/yum.repos.d/'
+
+8)template
+
+-a 'dest= src=\'#\'" content= owner= group= mode='
+
+
+9)yum：
+
+-a 'name= conf_file=(指明配置文件) state={present|latest|absent} enablerepo= disablerepo=' 
+
+[root@localhost ~]# ansible all -m yum 'name=httpd state=present' 
+
+
+10)service：
+
+-a 'name= state={started|stopped|restarted} enabled=(是否开机自动启动) runlevel='
+
+
+[root@localhost ~]# ansible all -m service -a 'name=httpd state=started'
+
+
+11)shell：
+
+-a 'COMMAND' 运行shell命令
+
+[root@localhost ~]# ansible all -m shell -a echo "123456789" |passwd --stdin user1'
+
+
+
+12)script：
+-a '/PATH/TO/SCRIPT'运行脚本
+
+[root@localhost ~]# ansible all -m script -a '/tmp/a.sh'
