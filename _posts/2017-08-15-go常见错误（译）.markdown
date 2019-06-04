@@ -2,7 +2,7 @@
 layout: post
 title:  "go常见错误（译）"
 date:   2017-07-30 15:55:00
-categories: 网站设计
+categories: 云计算
 tags:   go
 ---
 
