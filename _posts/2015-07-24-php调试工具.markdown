@@ -5,3 +5,22 @@ date:   2015-07-24  14:30
 categories: 网站设计
 tags:   php
 ---
+
+## 目的
+
+对于某些情况，比如php进程阻塞，你可能并不知道他究竟在做啥，你就需要对他进行调试，当然你可以使用strace，看出他的系统调用，但是更具体的点的可能就没有了，比如哪个php文件，哪个方法等
+
+php本质上是一套c写的框架，那么我们当然可以使用gdb来进行调试，gdb的使用就不过多说明，加断点，打印值，next，next ...
+
+
+## 使用
+
+tipi里其实php内核关键的几个点需要知道，以下例子
+
+    $sudo gdb -p 14973 
+    (gdb) print (char *)executor_globals.active_op_array->filename 
+    $1 = 0x9853a34 "xxx" 
+    (gdb) print (char *)executor_globals.active_op_array->function_name 
+    $2 = 0x9854db8 "xxx" 
+    (gdb) print executor_globals->current_execute_data->opline->lineno 
+    $3 = x
