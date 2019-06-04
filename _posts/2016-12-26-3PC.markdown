@@ -2,7 +2,7 @@
 layout: post
 title:  "3PC"
 date:   2016-12-26 22:31
-categories: 大数据
+categories: 分布式
 tags:   php
 ---
 

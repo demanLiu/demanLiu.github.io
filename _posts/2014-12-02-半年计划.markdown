@@ -19,9 +19,9 @@ tags:   plan
 * 开始设计模式细学，理解后写一篇博客
 
 
-## 2014-12-22 —— 20112-28(周计划）
+## 2014-12-22 —— 201412-28(周计划）
 
-* 复习Innodb 存储引擎揭秘
-* 开始设计模式一种（php，java，C++）至少2种实现
-* 完成nginx负载均衡和nginx的高可用
-* 练习一个算法
+* 复习Innodb 存储引擎揭秘 <span class="finish"> 完成</span>
+* 开始设计模式一种（php，java，C++）至少2种实现  <span class="finish"> 完成</span>
+* 完成nginx负载均衡和nginx的高可用  <span class="finish"> 完成</span>
+* 练习一个算法 <span class="finish"> 完成</span>
