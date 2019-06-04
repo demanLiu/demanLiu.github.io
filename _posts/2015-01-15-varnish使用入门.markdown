@@ -5,3 +5,46 @@ date:   2015-01-15  13:00
 categories: 基础运维
 tags:   varnish
 ---
+## 是什么
+
+一款高性能的开源HTTP加速器，说人话就是反向代理服务器，缓存服务器，利用内存文件映射把静态资源缓存了，提高性能，由于它是后面出来的会比squid设计好，性能高
+
+
+## VCL
+
+为了方便配置，整了个配置语言vcl，不过多赘述，给个网上例子
+
+
+    #配置两个后端服务器
+    backend web1 {
+    .host = "172.25.79.2";
+    .port = "80";
+    }
+    backend web2 {
+    .host = "172.25.79.3";
+    .port = "80";
+    }
+    ##把两个后端聚合为一个组,并检测后端健康状况
+    director lb round-robin {
+        { .backend = web1; }
+        { .backend = web2; }
+    }
+    sub vcl_recv {
+        if (req.http.host ~ "^(www.)?westos.org") {
+            set req.http.host = "www.westos.org";
+            set req.backend = lb;  
+            return(pass);   ##为了测试方便,不进行缓存
+            } elsif (req.http.host ~ "^bbs.westos.org") {
+                set req.backend = web2;
+            } else {
+                error 404 "westos cache";
+            }
+    }
+
+    --------------------- 
+    作者：Lucky__Strike 
+    来源：CSDN 
+    原文：https://blog.csdn.net/weixin_40658000/article/details/80033958 
+    版权声明：本文为博主原创文章，转载请附上博文链接！
+    
+建议安装尝试下，使用并不复杂

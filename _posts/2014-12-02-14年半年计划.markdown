@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "半年计划"
+title:  "14年半年计划"
 date:   2014-12-02  23:20
 categories: 读书笔记
 tags:   plan
