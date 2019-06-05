@@ -5,3 +5,41 @@ date:   2016-12-30 21:40
 categories: 分布式
 tags:   go
 ---
+
+
+### 目的
+
+和paxos一样为了解决分布式一致性问题，但是为了容易实现和理解，将问题简化，核心是选主，日志同步
+
+### 角色
+
+leader   响应客户端请求，生成日志，通知follower同步日志，当日志同步到半数节点后，提交日志
+
+follower  持久化leader的日志，在leader通知提交日志后，提交日志
+
+candidate  选举中临时角色
+
+
+leader在任期（term）内管理集群，leader周期性地发送heartbeat给follower，follwer选举超时时间内没有收到leader的heartbeat就会等待一段随机时间（防止活锁）
+然后发起选举
+
+follower 首先term +1 ，变成candidate,先给自己投一票，给其他集群发送拉票,超过半数则成为新的leader,否则等待选举超时下次选举(注意并不是所有follower都能选举，你自己的数据总要正确，不并带着大家向错误跑，因此只有拥有最新数据的follwer才能选举，log index 最大,term最大,当一个follower收到投票请求,先和自己log index比，然后比term，只有比本地大，才投票，否则拒绝)
+
+
+
+    如果王不在，最强的我就要造反，更新国号选举当王
+
+
+### 日志同步
+
+日志是一组有序日志条目组成，拥有编号log index，term,执行命令commands,log index+term => commands (不同log相同index 和term 里执行命令相同),为了提高效率，过半机器写入日志，leader就进行commit
+
+follower在写入日志时要保证按log index写入，如果缺失index不能写入，因此不同日志相同log index和term，他们之前的log都是一样的，用于一致性检查
+
+
+    只要保证额日志都是相同的就能保证集群的一致性，follower由于一些原因会多出或者确实条目，leader会让follower复制leader的log，还覆盖更新自己的日志
+
+
+### 日志压缩
+
+对已经提交的日志进行snapshot，当日志达到一定大小，做一次snapshot，丢弃日志
