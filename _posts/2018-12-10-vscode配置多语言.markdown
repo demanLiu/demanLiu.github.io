@@ -1,0 +1,77 @@
+---
+layout: post
+title:  "vscode配置多语言"
+date:   2018-12-19  10:11
+categories: 网站设计
+tags:   go
+---
+
+# vscode user settings  (最终配置)
+
+    主要是java相关
+
+    {
+        "editor.fontSize": 18,
+        "java.home": "/usr/lib/jvm/java-8-jdk",
+        "workbench.editor.enablePreview": false,
+        "maven.executable.path": "/usr/local/apache-maven-3.5.4/bin/mvn",
+        "maven.terminal.customEnv": [
+            {
+                "environmentVariable": "JAVA_HOME",      
+                "value": "/usr/lib/jvm/java-8-jdk"
+            }
+        ],
+        "vim.disableExtension": true,
+        "workbench.activityBar.visible": true,
+        "window.menuBarVisibility": "default",
+        "workbench.statusBar.visible": true,
+        "workbench.colorTheme": "Monokai",
+        "editor.formatOnSave": true,
+        "workbench.startupEditor": "newUntitledFile"
+    }
+
+
+# Extensions (my requirements)
+
+## java
+
+    java extension pack
+    java code generators
+    language support for java(tm) by red hat
+    spring boot extension pack
+
+## c/c++
+
+    c/c++
+
+## rust
+
+    rust
+
+## go 
+
+    go
+
+## 通用
+
+    vim
+
+vscode 给我感觉的就是比atom流畅,也没有idea的笨重,下面附上常用快捷键
+
+
+    F8 go to next errors or warnings
+    F12 go to definition
+    Ctrl+F12 go to implemention
+    Ctrl+Shift+F10 peek definition
+    Shift+F12 find all references
+    Ctrl+Alt+"-" 返回之前文件
+    F5 调试
+    F11 单步进入
+    Shift F11 单步跳出
+    F10 单步运行
+    F5 下个断
+
+
+
+
+

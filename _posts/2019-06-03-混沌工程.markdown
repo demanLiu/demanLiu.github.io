@@ -24,20 +24,29 @@ tags:   go
 #### 微服务容错能力
 
 1.模拟延迟
+
 2.模拟服务不可用
+
 3.机器满载
 
 #### 容器编排配置
 
 1.模拟kill pod，kill node
+
 2.增大pod负载
 
 #### 健壮
 
 
 1. 主备异常
+
 2.分布式存储不可用
+
 3.调度节点不可用
 
 
 可用看出主要对资源，网络，存储，io，各种异常条件尝试，更多可能，你可以自己脑补
+
+资料
+
+        https://github.com/chaosblade-io/awesome-chaosblade
