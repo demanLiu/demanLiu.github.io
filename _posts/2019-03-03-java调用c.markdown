@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "java调用C/C++动态库"
+date:   2019-03-03 13:11
+categories: 网站设计
+tags:   java
+---
+# 步骤
+
+
+1. native 声明 c/c++ 里方法 , System.loadLibrary()加载之后生成的so/dll
+
+
+        public class TestJavaCallC {
+
+            public native void sayHello();
+
+            public static void main(String[] args){
+                System.loadLibrary("NativeCode1");
+                TestJavaCallC tNative = new TestJavaCallC();
+                tNative.sayHello();
+            }
+        }
+
+
+2. 生成native方法的头文件
+
+        javah -jni  TestJavaCallC 
+
+
+3. 实现cpp
+
+
+
+        #include "TestJavaCallC.h"
+        #include<iostream>
+
+        using namespace std;
+
+        JNIEXPORT void JNICALL Java_TestJavaCallC_sayHello(JNIEnv *, jobject)
+        {
+            cout << "hello word" << endl;
+        }
+
+4. 生成 so
+
+
+       g++  -fPIC   -I/usr/lib/jvm/java-8-jdk/include -I/usr/lib/jvm/java-8-jdk/include/linux   -shared -o libNativeCode1.so  estJavaCallC.cpp
+
+
+
+5. so移到LD_LIBRARY_PATH，或修改LD_LIBRARY_PATH目录
+
+
+        export LD_LIBRARY_PATH=..
+
+6. 运行
+
+        java TestJavaCallC  
