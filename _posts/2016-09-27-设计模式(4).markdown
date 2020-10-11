@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(4) 工厂方法模式"
+key:  "设计模式(4) 工厂方法模式"
 date:   2016-09-21  22:26
 categories: 网站设计
 tags:   php

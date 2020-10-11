@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "缓存更新模式"
+key:  "缓存更新模式"
 date:   2016-12-21 22:40
 categories: 网站设计
 tags:   php

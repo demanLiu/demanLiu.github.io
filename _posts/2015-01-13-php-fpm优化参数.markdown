@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "php-fpm优化参数"
+key:  "php-fpm优化参数"
 date:   2014-12-04  22:02
 categories: 基础运维
 tags:   nginx

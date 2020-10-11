@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(20)state模式"
+key:  "设计模式(20)state模式"
 date:   2016-12-19 22:04
 categories: 网站设计
 tags:   php

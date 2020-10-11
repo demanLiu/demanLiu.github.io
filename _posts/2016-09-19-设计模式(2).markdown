@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(2)"
+key:  "设计模式(2)"
 date:   2016-09-21  22:26
 categories: 网站设计
 tags:   php

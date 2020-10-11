@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "Nginx基本配置"
+key:  "Nginx基本配置"
 date:   2014-12-04  23:20
 categories: 基础运维
 tags:   nginx

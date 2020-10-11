@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(16)iterator模式"
+key:  "设计模式(16)iterator模式"
 date:   2016-12-12 22:30
 categories: 网站设计
 tags:   php

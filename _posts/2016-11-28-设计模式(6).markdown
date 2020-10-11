@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(6) adapter模式"
+key:  "设计模式(6) adapter模式"
 date:   2016-11-28  22:57
 categories: 网站设计
 tags:   php

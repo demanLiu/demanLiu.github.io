@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "ansible使用"
+key:  "ansible使用"
 date:   2015-07-25  17:23
 categories: 基础运维
 tags:   php

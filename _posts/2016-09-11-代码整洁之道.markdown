@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "代码整洁之道"
+key:  "代码整洁之道"
 date:   2016-09-11  16:00
 categories: 网站设计
 tags:   php

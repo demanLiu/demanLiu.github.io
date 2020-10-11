@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "jsonp使用"
+key:  "jsonp使用"
 date:   2015-07-25  17:23
 categories: 网站设计
 tags:   php

@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(22)visitor模式"
+key:  "设计模式(22)visitor模式"
 date:   2016-12-21 22:32
 categories: 网站设计
 tags:   php

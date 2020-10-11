@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "docker开发环境实践"
+key:  "docker开发环境实践"
 date:   2016-12-30 16:40
 categories: 云计算
 tags:   php

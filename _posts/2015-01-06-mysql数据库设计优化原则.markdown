@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "mysql数据库设计优化原则"
+key:  "mysql数据库设计优化原则"
 date:   2015-01-06  22:20
 categories: 网站设计
 tags:   mysql

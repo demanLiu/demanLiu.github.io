@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "php各个缓存使用"
+key:  "php各个缓存使用"
 date:   2015-07-28  14:44
 categories: 网站设计
 tags:   php

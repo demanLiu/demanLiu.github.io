@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "Actor和CSP模型"
+key:  "Actor和CSP模型"
 date:   2017-07-30 15:55:00
 categories: 网站设计
 tags:   go

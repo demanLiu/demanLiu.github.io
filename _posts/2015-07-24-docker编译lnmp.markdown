@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "docker配置lnmp"
+key:  "docker配置lnmp"
 date:   2015-07-24  14:10
 categories: 基础运维
 tags:   php

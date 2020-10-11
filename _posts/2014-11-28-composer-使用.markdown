@@ -1,6 +1,6 @@
 ---
-layout: post
 title: "composer的使用"
+key: "composer的使用"
 date: 2014-11-28  13:00
 categories: 网站设计
 tags:   php

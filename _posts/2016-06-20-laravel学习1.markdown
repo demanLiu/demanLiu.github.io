@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "laravel学习1"
+key:  "laravel学习1"
 date:   2016-06-20  23:20
 categories: 网站设计
 tags:   php

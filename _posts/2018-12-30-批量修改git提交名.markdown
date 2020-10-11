@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "批量修改git提交名"
+key:  "批量修改git提交名"
 date:   2018-12-30  22:20
 categories: 基础运维
 tags:   git

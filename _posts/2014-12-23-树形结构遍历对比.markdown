@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "树形结构遍历对比（PHP）"
+key:  "树形结构遍历对比（PHP）"
 date:   2014-12-23  13:20
 categories: 网站设计
 tags:   php

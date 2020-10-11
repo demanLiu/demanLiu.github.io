@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(11)flyweight模式"
+key:  "设计模式(11)flyweight模式"
 date:   2016-12-04 22:20
 categories: 网站设计
 tags:   php

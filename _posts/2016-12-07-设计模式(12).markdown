@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(12)proxy模式"
+key:  "设计模式(12)proxy模式"
 date:   2016-12-07 23:00
 categories: 网站设计
 tags:   php

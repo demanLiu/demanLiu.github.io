@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "PHP ETL设计开发"
+key:  "PHP ETL设计开发"
 date:   2016-06-24  22:02
 categories: 网站设计
 tags:   php

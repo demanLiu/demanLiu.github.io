@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(14)Command模式"
+key:  "设计模式(14)Command模式"
 date:   2016-12-08 22:48
 categories: 网站设计
 tags:   php

@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "设计模式(13)chain of responsibility模式"
+key:  "设计模式(13)chain of responsibility模式"
 date:   2016-12-08 22:02
 categories: 网站设计
 tags:   php

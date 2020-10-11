@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "java调用C/C++动态库"
+key:  "java调用C/C++动态库"
 date:   2019-03-03 13:11
 categories: 网站设计
 tags:   java

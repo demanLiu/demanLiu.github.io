@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "混沌工程"
+key:  "混沌工程"
 date:   2019-06-03  23:30
 categories: 分布式
 tags:   go

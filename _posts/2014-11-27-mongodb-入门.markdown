@@ -1,6 +1,6 @@
 ---
-layout: post
 title: "mongodb入门"
+key: "mongodb入门"
 date: 2014-11-27 23:00
 categories: 大数据
 tags:   mongodb

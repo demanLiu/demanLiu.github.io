@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "archlinux性能调优"
+key:  "archlinux性能调优"
 date:   2019-01-12  21:11
 categories: 基础运维
 tags:   linux
