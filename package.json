@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/kitian616/jekyll-TeXt-theme/issues"
   },
+ "engines" :{ 
+   "node" : "16.x" 
+  },
   "scripts": {
     "build": "cross-env JEKYLL_ENV=production bundle exec jekyll build",
     "serve": "bundle exec jekyll serve -H 0.0.0.0",
