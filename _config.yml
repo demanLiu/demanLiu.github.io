@@ -118,7 +118,7 @@ sharing:
 ## => Comments
 ##############################
 comments:
-  provider: gitalk # false (default), "disqus", "gitalk", "valine", "custom"
+  provider: false # false (default), "disqus", "gitalk", "valine", "custom"
 
   ## Disqus
   disqus:
@@ -148,7 +148,7 @@ comments:
 ## => Pageview
 ##############################
 pageview:
-  provider: "leancloud" # false (default), "leancloud", "custom"
+  provider: false # false (default), "leancloud", "custom"
 
   ## Leancloud
   leancloud:
